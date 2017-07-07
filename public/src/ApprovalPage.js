@@ -12,7 +12,7 @@ class ApprovalPage extends Component {
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 
-  handleSaveClick(stateObj) {
+  handleSubmitClick(stateObj) {
     axios.post('http://localhost:3000/postUserInfo', {
       ethWallet: stateObj.ethWallet,
       email: stateObj.email,
@@ -37,7 +37,7 @@ class ApprovalPage extends Component {
       <div>
         <form onSubmit={(event) => {
           event.preventDefault();
-          this.handleSaveClick(this.state);
+          this.handleSubmitClick(this.state);
           }}>
           <label>
             Ethereum Wallet:
