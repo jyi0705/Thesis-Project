@@ -70,8 +70,6 @@ class ApprovalPage extends Component {
           </label>
           <br />
           <input type="submit" value="Submit" />
-          <button>
-          </button>
         </form>
         <br />
         <br />
