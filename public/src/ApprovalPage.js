@@ -13,7 +13,7 @@ class ApprovalPage extends Component {
   }
 
   handleSubmitClick(stateObj) {
-    axios.post('http://localhost:3000/postUserInfo', {
+    axios.post('http://localhost:3000/api/users', {
       ethWallet: stateObj.ethWallet,
       email: stateObj.email,
       age: stateObj.age
