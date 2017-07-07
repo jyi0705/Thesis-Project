@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import ApprovalPageButton from './ApprovalPageButton';
+import ApprovalPage from './ApprovalPage';
 
 class App extends Component {
   constructor(){
@@ -8,7 +10,10 @@ class App extends Component {
 
   render(){
     return(
-      <div>HI</div>
+      <div>
+        <ApprovalPageButton />
+        <ApprovalPage />
+      </div>
     )
   }
 }
