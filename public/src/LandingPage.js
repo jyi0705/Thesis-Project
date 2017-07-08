@@ -8,7 +8,8 @@ class Landing extends Component {
   render(){
     return(
       <div>
-        LANDING PAGE
+        INCLUDE STATS COMPARING annuity vs how much they would make with a tontine etc ...
+
       </div>
     )
   }

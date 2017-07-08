@@ -47,7 +47,7 @@ class About extends Component {
             <hr className="my-4" />
             <div className="row">
                 <div className="col-lg-4">
-                    <p className="h1">Guaranteed token value</p>
+                    <p className="h1">How to Join</p>
                 </div>
                 <div className="col-md-6 col-lg-4">
                     <p>
