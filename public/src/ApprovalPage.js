@@ -81,6 +81,12 @@ class ApprovalPage extends Component {
           <input type="submit" value="Submit" />
           <br />
         </form>
+        <div
+          className="g-recaptcha"
+          id="recaptcha"
+          data-sitekey="6Le4VygUAAAAAIK3cg3y3t4aYrDcC1m2MoNKBPYU"
+          >
+        </div>
         <br />
         <br />
           <b>INSTRUCTIONS TO SEND IN MOUTH SWAB:</b>
