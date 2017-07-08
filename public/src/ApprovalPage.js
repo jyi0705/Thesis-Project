@@ -7,7 +7,8 @@ class ApprovalPage extends Component {
     this.state= {
       ethWallet: '',
       email: '',
-      age: null
+      age: null,
+      donate: null
     }
     this.handleInputChange = this.handleInputChange.bind(this);
   }
@@ -69,7 +70,16 @@ class ApprovalPage extends Component {
             />
           </label>
           <br />
+          <label>
+            Allow your anonymous genome to be donated to research?
+            <input type="radio" name="donate" value="yes" checked={true} />
+            Yes
+            <input type="radio" name="donate" value="no" />
+            No
+          </label>
+          <br />
           <input type="submit" value="Submit" />
+          <br />
         </form>
         <br />
         <br />
