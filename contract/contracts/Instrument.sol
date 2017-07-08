@@ -32,7 +32,7 @@ contract Instrument {
   /**
 
    */  
-  function createPool(uint lowAge) {
+  function createPool(uint midAge) {
     // TODO : create a new pool for the collection
   }
   
