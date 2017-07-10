@@ -27,6 +27,7 @@ contract Instrument {
    */
   function Instrument() {
     // TODO : make contract
+    // init, make pools, etc
   }
   
   /**
@@ -34,6 +35,7 @@ contract Instrument {
    */  
   function createPool(uint midAge) {
     // TODO : create a new pool for the collection
+    //private
   }
   
   /**
@@ -42,6 +44,7 @@ contract Instrument {
   function addToPool() {
     // TODO : add a new user to the correct 
     // pool in the pool collection
+    // user
   }
   
   /**
@@ -49,6 +52,7 @@ contract Instrument {
    */
   function poolForAge() {
     // TODO : find the right pool for a new participant
+    // public
   }
   
   /**
@@ -56,6 +60,7 @@ contract Instrument {
    */
   function earlyExit() {
     // TODO : logic for leaving early
+    // user
   }
   
   /**
@@ -64,13 +69,7 @@ contract Instrument {
    */
   function removeFromPool(address[] addr) {
     // TODO : set the live boolean to false for these addr
-  }
-  
-  /**
-   
-   */
-  function withdrawl(address[] addr) {
-    // TODO : set the live boolean to false for these addr
+    // admin
   }
 
   /**
@@ -86,7 +85,7 @@ contract Instrument {
    */
   function collectDividend() {
     // TODO : collect dividend, 
-    // try to set timer until it can be called again
+    // called by user
   }
   
   /**
@@ -94,5 +93,6 @@ contract Instrument {
    */
   function selfDestruct() {
     // TODO : kill contract, return eth to users
+    // admin
   }
 }
