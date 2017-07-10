@@ -17,7 +17,7 @@ contract TestIterableMap {
     Assert.exists(iterMap.delete, "Iterable map should have delete");
   }
   
-  function testCansetAndGetParticipant() {
+  function testCanSetAndGetParticipant() {
     uint testAddr = "123394230954969340";
 
     iterMap.set(testAddr, true);
