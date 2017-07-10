@@ -12,7 +12,7 @@ contract Instrument {
 
   struct Pool {
     IterableMap participants;
-    uint total;
+    uint balance;
     uint midAge;
   }
 
@@ -76,8 +76,16 @@ contract Instrument {
   /**
 
    */
-  function releaseDividend(Pool[] pools) {
+  function releaseDividend() {
     // TODO : release dividend, 
+    // called by admin
+  }
+
+  /**
+
+   */
+  function collectDividend() {
+    // TODO : collect dividend, 
     // try to set timer until it can be called again
   }
   
@@ -87,6 +95,4 @@ contract Instrument {
   function selfDestruct() {
     // TODO : kill contract, return eth to users
   }
-
-
 }
