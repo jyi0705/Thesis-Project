@@ -200,6 +200,7 @@ contract('Instrument', function(accounts) {
   });
 
   it("should increment counter and pool's mid upon dividend calling", function() {
+
     var instrument;
     var poolIdx;
     var midAgeForPool = 71;

@@ -12,7 +12,7 @@ contract Instrument {
 
   struct Pool {
     IterableMap participants;
-    uint balance;
+    uint total;
     uint midAge;
   }
 
@@ -96,3 +96,4 @@ contract Instrument {
     // admin
   }
 }
+
