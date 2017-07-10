@@ -165,7 +165,7 @@ contract('Instrument', function(accounts) {
     var poolIdx;
     var midAgeForPool = 71;
     var age = 69;
-    var testAccount = "12345678910";
+    var testAccount = "0x0f09879ab76195d325cfec0500cbde0ba2bc1f9d";
 
     return Instrument.deployed()
     .then(function(instance) {
@@ -193,9 +193,9 @@ contract('Instrument', function(accounts) {
     })
     .then(function() {
       // get balance of account[0]
-      assert.equal(balance.valueOf(), 10000, "Failed to allocate dividend");
+      assert.equal(web3.fromWei(eth.getBalance(accounts[0])), 10000, "Failed to allocate dividend");
       // get balance of testAccount
-      assert.equal(balance.valueOf(), 10000, "Acccidentally allocated dividend to inactive user");
+      assert.equal(web3.fromWei(eth.getBalance(testAccount)), 10000, "Acccidentally allocated dividend to inactive user");
     });
   });
 
@@ -204,7 +204,7 @@ contract('Instrument', function(accounts) {
     var poolIdx;
     var midAgeForPool = 71;
     var age = 69;
-    var testAccount = "12345678910";
+    var testAccount = "0x0f09879ab76195d325cfec0500cbde0ba2bc1f9d";
     var SKIP_YEARS = 5;
 
     return Instrument.deployed()
