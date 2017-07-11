@@ -1,0 +1,213 @@
+{
+  "contract_name": "IterableMapping",
+  "abi": [
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "self",
+          "type": "IterableMapping.itmap storage"
+        },
+        {
+          "name": "key",
+          "type": "address"
+        },
+        {
+          "name": "value",
+          "type": "bool"
+        }
+      ],
+      "name": "set",
+      "outputs": [
+        {
+          "name": "replaced",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "self",
+          "type": "IterableMapping.itmap storage"
+        },
+        {
+          "name": "key",
+          "type": "address"
+        }
+      ],
+      "name": "remove",
+      "outputs": [
+        {
+          "name": "success",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "self",
+          "type": "IterableMapping.itmap storage"
+        },
+        {
+          "name": "key",
+          "type": "address"
+        }
+      ],
+      "name": "contains",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "self",
+          "type": "IterableMapping.itmap storage"
+        },
+        {
+          "name": "keyIndex",
+          "type": "uint256"
+        }
+      ],
+      "name": "iterate_get",
+      "outputs": [
+        {
+          "name": "key",
+          "type": "address"
+        },
+        {
+          "name": "value",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "self",
+          "type": "IterableMapping.itmap storage"
+        },
+        {
+          "name": "keyIndex",
+          "type": "uint256"
+        }
+      ],
+      "name": "iterate_next",
+      "outputs": [
+        {
+          "name": "r_keyIndex",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "self",
+          "type": "IterableMapping.itmap storage"
+        }
+      ],
+      "name": "iterate_start",
+      "outputs": [
+        {
+          "name": "keyIndex",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "self",
+          "type": "IterableMapping.itmap storage"
+        },
+        {
+          "name": "key",
+          "type": "address"
+        }
+      ],
+      "name": "get",
+      "outputs": [
+        {
+          "name": "value",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "self",
+          "type": "IterableMapping.itmap storage"
+        },
+        {
+          "name": "keyIndex",
+          "type": "uint256"
+        }
+      ],
+      "name": "iterate_valid",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "self",
+          "type": "IterableMapping.itmap storage"
+        },
+        {
+          "name": "callbackId",
+          "type": "bytes4"
+        }
+      ],
+      "name": "forEach",
+      "outputs": [],
+      "payable": false,
+      "type": "function"
+    }
+  ],
+  "unlinked_binary": "0x6060604052341561000c57fe5b5b61058a8061001c6000396000f3006060604052361561007d5763ffffffff60e060020a6000350416630c91c2ff811461007f57806320aafe18146100af5780636042c663146100da57806375a3e8e81461010557806388d0443714610136578063a21ab71614610156578063ae8de0f814610173578063c8fccc691461019e578063f2908194146101c0575bfe5b61009b600435600160a060020a036024351660443515156101da565b604080519115158252519081900360200190f35b61009b600435600160a060020a03602435166102a3565b604080519115158252519081900360200190f35b61009b600435600160a060020a0360243516610347565b604080519115158252519081900360200190f35b610113600435602435610368565b60408051600160a060020a03909316835290151560208301528051918290030190f35b6101446004356024356103b8565b60408051918252519081900360200190f35b610144600435610410565b60408051918252519081900360200190f35b61009b600435600160a060020a0360243516610426565b604080519115158252519081900360200190f35b61009b60043560243561044c565b604080519115158252519081900360200190f35b6101d8600435600160e060020a03196024351661045a565b005b600160a060020a038216600090815260208490526040812080546001909101805460ff191684151517905581811115610216576001915061029a565b600180860180549161022a91908301610509565b600160a060020a038516600090815260208790526040902060018083019091558601805491925085918390811061025d57fe5b906000526020600020900160005b508054600160a060020a031916600160a060020a03929092169190911790556002850180546001019055600091505b5b509392505050565b600160a060020a0381166000908152602083905260408120548015156102cc5760009150610340565b600160a060020a03831660009081526020859052604081209081556001908101805460ff191690558085018054600019840190811061030757fe5b906000526020600020900160005b50805491151560a060020a0260a060020a60ff02199092169190911790556002840180546000190190555b5092915050565b600160a060020a038116600090815260208390526040812054115b92915050565b60006000836001018381548110151561037d57fe5b906000526020600020900160005b5054600160a060020a031660008181526020869052604090206001015490925060ff1690505b9250929050565b60010160005b6001830154821080156103f75750600183018054839081106103dc57fe5b906000526020600020900160005b505460a060020a900460ff165b15610407576001909101906103be565b50805b92915050565b600061041e826000196103b8565b90505b919050565b600160a060020a03811660009081526020839052604090206001015460ff165b92915050565b600182015481105b92915050565b60006000600061046985610410565b92505b610476858461044c565b15610501576104858584610368565b9150915030600160a060020a03168460e060020a900483836040518363ffffffff1660e060020a0281526004018083600160a060020a0316600160a060020a03168152602001821515151581526020019250505060006040518083038160008761646e5a03f1505050505b6104fa85846103b8565b925061046c565b5b5050505050565b81548183558181151161052d5760008381526020902061052d918101908301610533565b5b505050565b61055b91905b80821115610557578054600160a860020a0319168155600101610539565b5090565b905600a165627a7a723058200e5189cd4fc6c4994773a503577ec78b49e753849b47165581a5d2e6ae0583790029",
+  "networks": {
+    "1499803739112": {
+      "events": {},
+      "links": {},
+      "address": "0x47e00334b45d33023cbc19a5c34e6b8e623703de",
+      "updated_at": 1499807807102
+    }
+  },
+  "schema_version": "0.0.5",
+  "updated_at": 1499812483669
+}

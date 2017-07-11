@@ -1,0 +1,105 @@
+{
+  "contract_name": "Instrument",
+  "abi": [
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "addr",
+          "type": "address[]"
+        }
+      ],
+      "name": "removeFromPool",
+      "outputs": [],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "age",
+          "type": "uint256"
+        }
+      ],
+      "name": "poolForAge",
+      "outputs": [],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "midAge",
+          "type": "uint256"
+        }
+      ],
+      "name": "createPool",
+      "outputs": [],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [],
+      "name": "selfDestruct",
+      "outputs": [],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [],
+      "name": "earlyExit",
+      "outputs": [],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "addr",
+          "type": "address[]"
+        }
+      ],
+      "name": "withdrawl",
+      "outputs": [],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [],
+      "name": "collectDividend",
+      "outputs": [],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [],
+      "name": "addToPool",
+      "outputs": [],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "payable": false,
+      "type": "constructor"
+    }
+  ],
+  "unlinked_binary": "0x606060405260066001556000600255341561001657fe5b5b5b5b6101d8806100286000396000f300606060405236156100725763ffffffff60e060020a6000350416633a4780108114610074578063810b8425146100c95780638259e6a0146100c95780639cb8a26a146100f3578063a4dee155146100f3578063a8fbb70714610074578063a98325b6146100f3578063c07401f0146100f3575bfe5b341561007c57fe5b6100c760048080359060200190820180359060200190808060200260200160405190810160405280939291908181526020018383602002808284375094965061019095505050505050565b005b34156100d157fe5b6100c7600435610190565b005b34156100d157fe5b6100c7600435610190565b005b34156100fb57fe5b6100c761019c565b005b34156100fb57fe5b6100c761019c565b005b341561007c57fe5b6100c760048080359060200190820180359060200190808060200260200160405190810160405280939291908181526020018383602002808284375094965061019095505050505050565b005b34156100fb57fe5b6100c761019c565b005b34156100fb57fe5b6100c761019c565b005b5b50565b5b50565b5b50565b5b565b5b565b5b50565b5b565b5b5600a165627a7a723058203d83d5dc3ba0ad1fa8ccadb5b64e1af3eb2f79160cf1d8f596d89b7911156fd90029",
+  "networks": {
+    "1499803739112": {
+      "events": {},
+      "links": {},
+      "address": "0x379b5e818be794fb643d901db3bc95f2aee08902",
+      "updated_at": 1499807807102
+    }
+  },
+  "schema_version": "0.0.5",
+  "updated_at": 1499807807102
+}

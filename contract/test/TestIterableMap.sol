@@ -2,79 +2,73 @@ pragma solidity ^0.4.2;
 
 import "truffle/Assert.sol";
 import "truffle/DeployedAddresses.sol";
-import "../contracts/IterableMap.sol";
+import "../contracts/TestMapping.sol";
 
 contract TestIterableMap {
 
-  function beforeEach() {
-    IterableMap iterMap;
-  }
-
-  function testHasCorrectMethods() {
-    Assert.exists(iterMap.set, "Iterable map should have set");
-    Assert.exists(iterMap.get, "Iterable map should have get");
-    Assert.exists(iterMap.forEach, "Iterable map should have for each");
-    Assert.exists(iterMap.delete, "Iterable map should have delete");
-  }
-  
   function testCanSetAndGetParticipant() {
-    uint testAddr = "123394230954969340";
+    IterableMapping.itmap storage testMap;
+    address testAddr = msg.sender;
 
-    iterMap.set(testAddr, true);
-
-    Assert.equal(iterMap.get(testAddr), true, "Iterable map should set participant");
+    IterableMapping.set(testMap, testAddr, true);
+    bool res = IterableMapping.get(testMap, testAddr);
+    
+    Assert.equal(res, true, "Iterable map should set participant");
   }
 
   function testCanRemoveParticipant() {
-    uint testAddr = "123394230954969340";
+    IterableMapping.itmap storage testMap;
+    address testAddr = msg.sender;
 
-    iterMap.set(testAddr, true);
+    IterableMapping.set(testMap, testAddr, true);
+    bool res1 = IterableMapping.get(testMap, testAddr);
 
-    Assert.equal(iterMap.get(testAddr), true, "Iterable map should set participant");
+    Assert.equal(res1, true, "Iterable map should set participant");
 
-    iterMap.delete(testAddr);
+    IterableMapping.remove(testMap, testAddr);
+    bool res2 = IterableMapping.get(testMap, testAddr);
 
-    Assert.equal(iterMap.get(testAddr), false, "Iterable map should delete participant");
+    Assert.equal(res2, false, "Iterable map should delete participant");
   }
 
   function testCanIterateOverParticipants() {
-    uint testAddr1 = "123394230954969340";
-    uint testAddr2 = "009283948905834098";
-    uint testAddr3 = "00928394865834098";
+    IterableMapping.itmap storage testMap;
+    address testAddr1 = msg.sender;
     uint count = 0;
-    uint expectedCount = 3;
+    uint expectedCount = 1;
+    
+    IterableMapping.set(testMap, testAddr1, true);
 
-    iterMap.set(testAddr1, true);
-    iterMap.set(testAddr2, true);
-    iterMap.set(testAddr3, true);
+    // bytes4 callbackId = bytes4(sha3("cb()"));
+    // IterableMapping.forEach(testMap, callbackId);
 
-    iterMap.forEach(function(uint addr) {
+    for (var i = IterableMapping.iterate_start(testMap); IterableMapping.iterate_valid(testMap, i); i = IterableMapping.iterate_next(testMap, i)) {
+      var (key, value) = IterableMapping.iterate_get(testMap, i);
       count++;
-    });
-
-    Assert.equal(count, expected, "Iterable map should be able to iterate");
-  }
-
-  function testIterMapIntegration() {
-    uint testAddr1 = "123394230954969340";
-    uint testAddr2 = "009283948905834098";
-    uint testAddr3 = "00928394865834098";
-    uint count = 0;
-    uint expectedCount = 3;
-
-    iterMap.set(testAddr1, true);
-    iterMap.set(testAddr2, true);
-    iterMap.set(testAddr3, true);
-
-    iterMap.forEach(function(uint addr) {
-      count++;
-      if (addr != testAddr1)
-        iterMap.delete(addr);
-    });
+    }
 
     Assert.equal(count, expectedCount, "Iterable map should be able to iterate");
-    Assert.equal(iterMap.get(testAddr1), true, "Iterable map should be able to insert and keep");
-    Assert.equal(iterMap.get(testAddr2), true, "Iterable map should be able to insert and delete");
-    Assert.equal(iterMap.get(testAddr3), true, "Iterable map should be able to insert and delete");
+  }
+
+  function testItermapIntegration() {
+    IterableMapping.itmap storage testMap;
+    address testAddr1 = msg.sender;
+    uint count = 0;
+    uint expectedCount = 1;
+    
+    IterableMapping.set(testMap, testAddr1, true);
+    bool res1 = IterableMapping.get(testMap, testAddr1);
+    Assert.equal(res1, true, "Should add and get user");
+
+    for (var i = IterableMapping.iterate_start(testMap); IterableMapping.iterate_valid(testMap, i); i = IterableMapping.iterate_next(testMap, i)) {
+      var (key, value) = IterableMapping.iterate_get(testMap, i);
+      count++;
+      Assert.equal(value, true, "Iterate value returned should be true");
+      IterableMapping.remove(testMap, key);
+      bool res2 = IterableMapping.get(testMap, key);
+      Assert.equal(res2, false, "Should have deleted key from iterate");
+    }
+
+    Assert.equal(count, expectedCount, "Iterable map should be able to iterate");
   }
 }
