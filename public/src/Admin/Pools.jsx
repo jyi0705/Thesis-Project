@@ -53,7 +53,7 @@ export default class Pools extends Component {
     var pools = this.state.pools.map((pool, idx) => (
       < Pool 
         key={idx}
-        midAge={pool.midAge }
+        midAge={pool.midAge}
         participants={pool.participants.length}
         totalEth={pool.participants.totalEth} 
       />
