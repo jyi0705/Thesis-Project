@@ -80,6 +80,7 @@ contract Instrument {
    */
   function removeFromPool(address[] addr) {
     // TODO : set the live boolean to false for these addr
+
   }
 
   /**

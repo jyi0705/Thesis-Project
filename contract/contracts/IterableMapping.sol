@@ -2,7 +2,7 @@ pragma solidity ^0.4.4;
 
 library IterableMapping {
     
-struct itmap {
+  struct itmap {
     mapping(address => IndexValue) data;
     KeyFlag[] keys;
     uint size;
