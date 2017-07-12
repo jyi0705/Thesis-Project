@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 class Contributing extends Component {
   render() {
+      console.log('you are in contributing')
     return (
   <div className="scroll-point" id="contributing">
       <section className="contributing py-4 bg-white">
