@@ -13,7 +13,7 @@ import FAQ from '../Containers/User/FAQ.jsx';
 import TokenDetail from '../Components/User/TokenDetail.jsx';
 import Admin from '../Containers/Admin/Admin';
 import NavBar from '../Containers/NavBar';
-import Wallet from '../Containers/User/Wallet'
+import UserPoolInfo from '../Containers/User/UserPoolInfo'
 
 const store = createStore(reducers, applyMiddleware(ReduxThunk, ReduxPromise));
 
@@ -35,7 +35,7 @@ const App = () => {
         <Route path="/faq" component={FAQ}/>
         <Route path="/about" component={About}/>
         <Route path="/admin" component={Admin}/>
-        <Route path="/wallet" component={Wallet}/>
+        <Route path="/userPoolInfo" component={UserPoolInfo}/>
       </Switch>
     </div>
    </HashRouter>
