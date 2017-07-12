@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import FAQEntry from '../../Components/User/FAQEntry'
 class FAQ extends Component {
   render() {
     return (
