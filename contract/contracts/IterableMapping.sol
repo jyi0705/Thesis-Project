@@ -70,6 +70,10 @@ library IterableMapping {
   function get(itmap storage self, address key) returns (bool value) {
     value = self.data[key].value;
   }
+
+  function size(itmap storage self) returns (uint size) {
+    size = self.size;
+  }
     
 } 
 
