@@ -23,6 +23,18 @@ contract Instrument {
   mapping(address => Participant) waitlist;
   address owner;
 
+  /* Events */
+  event Log(
+    address addr,
+    uint age,
+    string msg
+  );
+
+  event Size(
+    // address addr,
+    uint size
+  );
+
   // struct Verify { address walletAdd; bool verified; }
   /**
 
@@ -54,17 +66,18 @@ contract Instrument {
     Pool storage newPool;
     newPool.midAge = midAge;
     newPool.totalEth = 0;
+    newPool.participants.size = 0;
     pools.push(newPool);
   }
   
   /**
 
    */
-  function verify(string str, uint age) {
-    address addr = UtilsLib.parseAddr(str);
+  function verify(address addr, uint age) {
     waitlist[addr].verified = true;
     waitlist[addr].startAge = age;
     waitlist[addr].added = false;
+    Log(addr, age, "verified user");
   }
 
    /**
@@ -76,6 +89,7 @@ contract Instrument {
     Participant user = waitlist[msg.sender];
     if (!user.verified || user.added) {
       //TODO : Event -> failed to add participant
+      Log(msg.sender, user.startAge, "failed to add user");
       return;
     } 
     
@@ -85,6 +99,7 @@ contract Instrument {
     uint poolIdx = poolForAge(user.startAge);
     IterableMapping.set(pools[poolIdx].participants, msg.sender, true);
     //TODO : Event -> added participant
+    Log(msg.sender, user.startAge, "added user");
   }
   
   /**
@@ -141,9 +156,12 @@ contract Instrument {
    Admin passes the contract a list of people to withdraw
    from program. The program will loop through 
    */
-  function removeFromPool(address[] addr) {
+  function removeFromPool(address[] addrs) {
     // TODO : set the live boolean to false for these addr
-
+    // for (var i = 0; i < addrs.length; i++) {
+    //   IterableMapping.remove()
+    // }
+    // Log(addr, age, "verified user");
   }
 
   /**

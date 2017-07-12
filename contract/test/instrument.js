@@ -1,7 +1,7 @@
 var Instrument = artifacts.require("./Instrument.sol");
 
 contract('Instrument', (accounts) => {
- 
+
   it("should get pool from user age", () => {
     var instrument;
     var pools = [11 , 11, 1,  0,  3,  2,  4,  6,  0, 12];
@@ -48,6 +48,7 @@ contract('Instrument', (accounts) => {
     return Instrument.deployed()
     .then(instance => {
       instrument = instance;
+
       return instrument.verify(accounts[0], age, { from: accounts[0] });
     })
     .then(() => {
@@ -55,44 +56,54 @@ contract('Instrument', (accounts) => {
     })
     .then((pool) => {
       poolIdx = pool.c[0];
-      console.log("index", poolIdx);
       return instrument.pool.call(poolIdx);
     })
     .then(pool => {
-      console.log("not added yet", pool);
-      assert.equal(pool[1].c[0], 0, "Initial user number is incorrect");
+      assert.equal(pool[0].c[0], 0, "Initial user number is incorrect");
       assert.equal(pool[2].c[0], midAgeForPool, "Did not place participant in the correct pool");
+      return instrument.signContract({ from: accounts[0] });
     })
-    // .then((pool) => {
-    //   poolIdx = pool.c[0];
-    //   return instrument.signContract({ from: accounts[0] });
-    // })
-    // .then(() => {
-    //   return instrument.pool.call(poolIdx);
-    // })
-    // .then(pool => {
-    //   console.log("added", pool);
-    //   assert.equal(pool[1].c[0], 1, "Failed to create user");
-    //   assert.equal(pool[2].c[0], midAgeForPool, "Did not place participant in the correct pool");
-    // })
+    .then(() => {
+      return instrument.pool.call(poolIdx);
+    })
+    .then(pool => {
+      assert.equal(pool[0].c[0], 1, "Failed to create user");
+      assert.equal(pool[2].c[0], midAgeForPool, "Did not place participant in the correct pool");
+    });
   });
 
   it("should delete from pool", () => {
-    var instrument;
+        var instrument;
     var poolIdx;
-    var midAgeForPool = 71;
+    var midAgeForPool = 72;
     var age = 69;
 
     return Instrument.deployed()
-    .then((instance) => {
+    .then(instance => {
       instrument = instance;
-      return instrument.signContract({ from: accounts[0] }, age);
+
+      return instrument.verify(accounts[0], age, { from: accounts[0] });
     })
     .then(() => {
-      return instrument.poolForAge(age);
+      return instrument.poolForAge.call(age);
+    })
+    .then((pool) => {
+      poolIdx = pool.c[0];
+      return instrument.pool.call(poolIdx);
     })
     .then(pool => {
-      poolIdx = pool;
+      assert.equal(pool[0].c[0], 0, "Initial user number is incorrect");
+      assert.equal(pool[2].c[0], midAgeForPool, "Did not place participant in the correct pool");
+      return instrument.signContract({ from: accounts[0] });
+    })
+    .then(() => {
+      return instrument.pool.call(poolIdx);
+    })
+    .then(pool => {
+      assert.equal(pool[0].c[0], 1, "Failed to create user");
+      assert.equal(pool[2].c[0], midAgeForPool, "Did not place participant in the correct pool");
+    })
+    .then(() => {
       return instrument.removeFromPool([ accounts[0] ]);
     })
     .then(() => {
