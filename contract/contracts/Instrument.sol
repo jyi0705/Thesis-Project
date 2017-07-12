@@ -170,6 +170,8 @@ contract Instrument {
   function releaseDividend() {
     // TODO : release dividend, 
     // called by admin
+  }
+
   function withdrawl(address[] addr) {
     // TODO : set the live boolean to false for these addr
     // for(uint i = 0; i < addr.length; i++) {
@@ -186,14 +188,6 @@ contract Instrument {
 
    */
   function collectDividend() {
-    // TODO : collect dividend, 
-    // called by user
-  }
-
-    /**
-
-   */
-  function releaseDividend() {
     // TODO : collect dividend, 
     // called by user
   }
