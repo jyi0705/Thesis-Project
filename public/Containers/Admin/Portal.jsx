@@ -5,9 +5,10 @@ import Dividends from './Dividends.jsx';
 
 var Portal = (props) => (
   <div>
-    <DeleteUsers/>
+    Pool
+    {/* <DeleteUsers/>
     <Pools/>
-    <Dividends/>
+    <Dividends/> */}
   </div>
 );
 
