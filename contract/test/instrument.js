@@ -4,28 +4,8 @@ contract('Instrument', (accounts) => {
  
   it("should get pool from user age", () => {
     var instrument;
-    var age1 = 100;
-    var pool1 = 11;
-    var age2 = 97;
-    var pool2 = 11;
-    var age3 = 33;
-    var pool3 = 1;
-    var age4 = 20;
-    var pool4 = 0;
-    var age5 = 41;
-    var pool5 = 3;
-    var age6 = 35;
-    var pool6 = 2;
-    var age7 = 50;
-    var pool7 = 4;
-    var age8 = 67;
-    var pool8 = 6;
-    var age9 = 0;
-    var pool9 = 0;
-    var age10 = 130;
-    var pool10 = 12;
-    var ages = [age1, age2, age3, age4, age5, age6, age7, age8, age9, age10];
-    var pools = [pool1, pool2, pool3, pool4, pool5, pool6, pool7, pool8, pool9, pool10];
+    var pools = [11 , 11, 1,  0,  3,  2,  4,  6,  0, 12];
+    var ages =  [100, 97, 33, 20, 41, 35, 50, 67, 0, 130];
 
     return Instrument.deployed()
     .then(instance => {
@@ -34,38 +14,48 @@ contract('Instrument', (accounts) => {
       return Promise.all(promises);
     })
     .then(pools => {
-    // pools [ { [String: '11'] s: 1, e: 1, c: [ 11 ] },
-    // { [String: '11'] s: 1, e: 1, c: [ 11 ] },
-    // { [String: '1'] s: 1, e: 0, c: [ 1 ] },
-    // { [String: '0'] s: 1, e: 0, c: [ 0 ] },
-    // { [String: '3'] s: 1, e: 0, c: [ 3 ] },
-    // { [String: '2'] s: 1, e: 0, c: [ 2 ] },
-    // { [String: '4'] s: 1, e: 0, c: [ 4 ] },
-    // { [String: '6'] s: 1, e: 0, c: [ 6 ] },
-    // { [String: '0'] s: 1, e: 0, c: [ 0 ] },
-    // { [String: '12'] s: 1, e: 1, c: [ 12 ] } ]
       pools.forEach((pool, idx) => {
         assert.equal(pool.c[0], pools[idx], "Should correctly map from age to pool");
       });
     });
   });
 
+  it("should create properly spaced pools", () => {
+    var instrument;
+    var poolIdx;
+    var indices = [0,  1,  2,  3,  4,  5,  6,  7,  8,  9,  10, 11];
+    var midAges = [23, 30, 37, 44, 51, 58, 65, 72, 79, 86, 93, 100]
+
+    return Instrument.deployed()
+    .then(instance => {
+      instrument = instance;
+      var promises = indices.map(idx => instrument.pool.call(idx));
+      return Promise.all(promises);
+    })
+    .then((pools) => {
+      pools.forEach((pool, idx) => {
+        assert.equal(pool[2].c[0], midAges[idx], "Should create the correct spacing of pool ages");
+      });
+    });
+  });
+  
   it("should add user to pool", () => {
     var instrument;
     var poolIdx;
-    var midAgeForPool = 71;
+    var midAgeForPool = 72;
     var age = 69;
 
     return Instrument.deployed()
     .then(instance => {
       instrument = instance;
-      console.log('account', new BigNumber(0))
-      return instrument.verify(accounts[0], age);
+      return instrument.verify(accounts[0], age, { from: accounts[0] });
     })
     .then(() => {
       return instrument.poolForAge.call(age);
     })
-    .then(() => {
+    .then((pool) => {
+      poolIdx = pool.c[0];
+      console.log("index", poolIdx);
       return instrument.pool.call(poolIdx);
     })
     .then(pool => {
@@ -73,18 +63,18 @@ contract('Instrument', (accounts) => {
       assert.equal(pool[1].c[0], 0, "Initial user number is incorrect");
       assert.equal(pool[2].c[0], midAgeForPool, "Did not place participant in the correct pool");
     })
-    .then((pool) => {
-      poolIdx = pool.c[0];
-      return instrument.signContract({ from: accounts[0] });
-    })
-    .then(() => {
-      return instrument.pool.call(poolIdx);
-    })
-    .then(pool => {
-      console.log("added", pool);
-      assert.equal(pool[1].c[0], 1, "Failed to create user");
-      assert.equal(pool[2].c[0], midAgeForPool, "Did not place participant in the correct pool");
-    })
+    // .then((pool) => {
+    //   poolIdx = pool.c[0];
+    //   return instrument.signContract({ from: accounts[0] });
+    // })
+    // .then(() => {
+    //   return instrument.pool.call(poolIdx);
+    // })
+    // .then(pool => {
+    //   console.log("added", pool);
+    //   assert.equal(pool[1].c[0], 1, "Failed to create user");
+    //   assert.equal(pool[2].c[0], midAgeForPool, "Did not place participant in the correct pool");
+    // })
   });
 
   it("should delete from pool", () => {

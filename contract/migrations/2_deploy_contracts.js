@@ -11,12 +11,12 @@ module.exports = function(deployer) {
   deployer.deploy(MetaCoin);
 
   deployer.deploy(IterableMapping);
+  deployer.deploy(UtilsLib);
   deployer.link(IterableMapping, Instrument);
+  deployer.link(UtilsLib, Instrument);
   deployer.deploy(Instrument);
 
   deployer.deploy(IterableMapping);
-  deployer.deploy(UtilsLib);
-  deployer.link(UtilsLib, TestMapping);
   deployer.link(IterableMapping, TestMapping);
   deployer.deploy(TestMapping);
 };

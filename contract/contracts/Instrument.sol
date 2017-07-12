@@ -22,17 +22,17 @@ contract Instrument {
   Pool[] pools;
   mapping(address => Participant) waitlist;
   address owner;
-  uint LOW_AGE = 20;
-  uint GAP = 6;
 
   // struct Verify { address walletAdd; bool verified; }
   /**
 
    */
   function Instrument() {
+    uint BASE = 20;
+    uint GAP = 6;
     owner = msg.sender;
     for (var i = 0; i < 12; i++) {
-      createPool(LOW_AGE + GAP / 2 + i * GAP);
+      createPool((BASE + GAP / 2) + (GAP + 1) * i);
     }
   }
   
@@ -60,7 +60,8 @@ contract Instrument {
   /**
 
    */
-  function verify(address addr, uint age) {
+  function verify(string str, uint age) {
+    address addr = UtilsLib.parseAddr(str);
     waitlist[addr].verified = true;
     waitlist[addr].startAge = age;
     waitlist[addr].added = false;

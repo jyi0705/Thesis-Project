@@ -1,6 +1,6 @@
 pragma solidity ^0.4.4;
 
-library ConvertLib{
+library UtilsLib{
   function parseAddr(string _a) internal returns (address){
     bytes memory tmp = bytes(_a);
     uint160 iaddr = 0;
