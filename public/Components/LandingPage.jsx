@@ -6,6 +6,7 @@ class Landing extends Component {
   }
 
   render(){
+    console.log('you are in landing')
     return(
       <div>
         INCLUDE STATS COMPARING annuity vs how much they would make with a tontine etc ...

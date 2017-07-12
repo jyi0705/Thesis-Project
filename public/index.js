@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom';
 import React from 'react';
-import App from './src/App.jsx';
+import App from './Containers/App.jsx';
 // import Routes from './routes';
 
 
