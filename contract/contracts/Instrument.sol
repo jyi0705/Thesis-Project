@@ -80,12 +80,14 @@ contract Instrument {
    */
   function removeFromPool(address[] addr) {
     // TODO : set the live boolean to false for these addr
-
   }
 
   /**
 
    */
+  function releaseDividend() {
+    // TODO : release dividend, 
+    // called by admin
   function withdrawl(address[] addr) {
     // TODO : set the live boolean to false for these addr
     // for(uint i = 0; i < addr.length; i++) {

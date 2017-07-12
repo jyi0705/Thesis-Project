@@ -1,5 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import React from 'react'
+
 const NavBar = () => (
   <nav className="navbar navbar-default">
     <div className="container-fluid">
