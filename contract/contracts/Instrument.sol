@@ -21,7 +21,7 @@ contract Instrument {
   /* Local variables */
   Pool[] pools;
   mapping(address => Participant) waitlist;
-  address owner;
+  address public owner;
 
   /* Events */
   event Log(
@@ -201,10 +201,23 @@ contract Instrument {
   function releaseDividend() {
     // TODO : release dividend, 
     // called by admin
-    
+    require(owner === msg.sender);
+
+    for (var p = 0; p < pools.length; p++){
+      if(pools[p].midAge >= 70){
+        size = IterableMapping.participants.size();
+        totalEth = pools[p].totalEth;
+        for (var i = IterableMapping.iterate_start(participants); IterableMapping.iterate_valid(participants, i); i = IterableMapping.iterate_next(participants, i))
+        {
+          var addr = IterableMapping.get(participants, i);
+          dividends[addr] = ((totalEth * .05))/size
+        }
+        pools[p].midAge++;
+      }
+    }
   }
 
-  function withdrawl(address[] addr) {
+  function withdrawl() {
     // TODO : set the live boolean to false for these addr
     // for(uint i = 0; i < addr.length; i++) {
     //   for(uint j = 0; j < verified.length; j++) {
@@ -213,6 +226,7 @@ contract Instrument {
     //     }
     //   }
     // }
+    require(msg.sender )
     
   }
 
