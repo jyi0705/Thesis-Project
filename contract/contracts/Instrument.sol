@@ -22,6 +22,8 @@ contract Instrument {
   Pool[] pools;
   mapping(address => Participant) waitlist;
   address public owner;
+  mapping(address => uint) dividends;
+  mapping(address => uint) pendingDividends;
 
   /* Events */
   event Log(
@@ -201,41 +203,71 @@ contract Instrument {
   function releaseDividend() {
     // TODO : release dividend, 
     // called by admin
-    require(owner === msg.sender);
+    // require(owner === msg.sender);
 
-    for (var p = 0; p < pools.length; p++){
-      if(pools[p].midAge >= 70){
-        size = IterableMapping.participants.size();
-        totalEth = pools[p].totalEth;
-        for (var i = IterableMapping.iterate_start(participants); IterableMapping.iterate_valid(participants, i); i = IterableMapping.iterate_next(participants, i))
+    for (var p = 0; p < pools.length; p++) {
+      if(pools[p].midAge >= 70) {
+        uint size = pools[p].participants.size;
+        Log(msg.sender, size, 'this is the siez');
+        uint totalEth = pools[p].totalEth;
+        for (var i = IterableMapping.iterate_start(pools[p].participants); IterableMapping.iterate_valid(pools[p].participants, i); i = IterableMapping.iterate_next(pools[p].participants, i))
         {
-          var addr = IterableMapping.get(participants, i);
-          dividends[addr] = ((totalEth * .05))/size
+          var (addr, val)  = IterableMapping.iterate_get(pools[p].participants, i);
+          dividends[addr] = totalEth / (size * 20);
         }
-        pools[p].midAge++;
       }
+      pools[p].midAge++;
     }
   }
 
-  function withdrawl() {
-    // TODO : set the live boolean to false for these addr
-    // for(uint i = 0; i < addr.length; i++) {
-    //   for(uint j = 0; j < verified.length; j++) {
-    //     if(addr[i] === verified[j].walletAdd) {
-    //       verified[j].verified = false;
-    //     }
-    //   }
-    // }
-    require(msg.sender )
-    
-  }
+  // function withdrawl() return (bool) {
+  //   // TODO : set the live boolean to false for these addr
+  //   // for(uint i = 0; i < addr.length; i++) {
+  //   //   for(uint j = 0; j < verified.length; j++) {
+  //   //     if(addr[i] === verified[j].walletAdd) {
+  //   //       verified[j].verified = false;
+  //   //     }
+  //   //   }
+  //   // }
+
+  //     var amount = pendingDividends[msg.sender];
+  //     if (amount > 0) {
+  //         // It is important to set this to zero because the recipient
+  //         // can call this function again as part of the receiving call
+  //         // before `send` returns.
+  //         pendingDividends[msg.sender] = 0;
+
+  //         if (!msg.sender.send(amount)) {
+  //             pendingDividends[msg.sender] = amount;
+  //             return false;
+  //         }
+  //     }
+  //     return true;
+  // }
 
   /**
 
    */
-  function collectDividend() {
+  function collectDividend() returns (bool) {
     // TODO : collect dividend, 
     // called by user
+    var amount = pendingDividends[msg.sender];
+      if (amount > 0) {
+          // It is important to set this to zero because the recipient
+          // can call this function again as part of the receiving call
+          // before `send` returns
+
+          pendingDividends[msg.sender] = 0;
+
+          if (!msg.sender.send(amount)) {
+              pendingDividends[msg.sender] = amount;
+              return false;
+          }
+      }
+      for(var i = 0; i < pools.length; i++ ) {
+        pools[i].totalEth -= amount;
+      }
+      return true;
   }
   
   /**

@@ -29,7 +29,7 @@ contract('Instrument', (accounts) => {
     var instrument;
     var poolIdx;
     var indices = [0,  1,  2,  3,  4,  5,  6,  7,  8,  9,  10, 11];
-    var midAges = [23, 30, 37, 44, 51, 58, 65, 72, 79, 86, 93, 100]
+    var midAges = [23, 30, 37, 44, 51, 58, 65, 72, 79, 86, 93, 100];
 
     return Instrument.deployed()
     .then(instance => {
