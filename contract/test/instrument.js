@@ -266,9 +266,6 @@ contract('Instrument', (accounts) => {
       poolIdx = pool;
       return instrument.releaseDividends({ from: accounts[0] });
     })
-    // .then(() => {
-    //   return instrument.withdraw([ testAccount ])
-    // })
     .then(() => {
       return instrument.pendingDividends.call(accounts[0]);
     })
@@ -282,8 +279,7 @@ contract('Instrument', (accounts) => {
       console.log('asdf', info);
       // get balance of account[0]
       console.log(balance(accounts[0]), '|', finalBalanceWithoutDividend + parsed, "After dividend these two numbers should be similar");
-      // get balance of testAccount
-      // assert.equal(web3.fromWei(web3.eth.getBalance(testAccount)), 10000, "Acccidentally allocated dividend to inactive user");
+      instrument.removeFromPool([accounts[0]], {from : accounts[0] });
     })
   });
 
@@ -291,35 +287,49 @@ contract('Instrument', (accounts) => {
 
     var instrument;
     var poolIdx;
-    var midAgeForPool = 71;
+    var midAgeForPool = 73;
     var age = 69;
-    var testAccount = "0x0f09879ab76195d325cfec0500cbde0ba2bc1f9d";
+    var startingBalance = balance(accounts[3]);
     var SKIP_YEARS = 5;
+    var price = 10;
 
     return Instrument.deployed()
     .then(instance => {
       instrument = instance;
-      return instrument.signContract({ from: accounts[0] }, age);
+
+      return instrument.verify(accounts[3], age, { from: accounts[3] });
     })
     .then(() => {
-      return instrument.signContract({ from: testAccount }, age);
+      return instrument.poolForAge.call(age);
     })
-    .then(() => {
-      return instrument.poolForAge(age);
+    .then((pool) => {
+      poolIdx = pool.c[0];
+      return instrument.pool.call(poolIdx);
     })
     .then(pool => {
-      poolIdx = pool;
-      var promises = [];
-      for (var i = 0; i < SKIP_YEARS; i++) {
-        promises.push(instrument.releaseDividends({ from: accounts[0] }));
-      }
-      return promises;
+      assert.equal(pool[0].c[0], 0, "Initial user number is incorrect"); 
+      assert.equal(pool[2].c[0], midAgeForPool, "Did not place participant in the correct pool");
+      return instrument.sendTransaction({ from: accounts[3], value: price * (10 ** 18) });
     })
     .then(() => {
-      return instrument.pools();
+      return instrument.pool.call(poolIdx);
     })
-    .then(pools => {
-      assert.equal(pools[poolIdx].midAge, midAgeForPool + SKIP_YEARS, "Failed to update pools timetable after dividend releases");
+    .then(pool => {
+      // console.log("pool", pool);
+      assert.equal(pool[0].c[0], 1, "Failed to create user");
+      assert.equal(pool[2].c[0], midAgeForPool, "Did not place participant in the correct pool");
+    })
+    .then(pool => {
+      // poolIdx = pool;
+      return instrument.releaseDividends({ from: accounts[3] });
+    })
+    .then(() => {
+      console.log(poolIdx);
+      return instrument.pool.call(poolIdx);
+    })
+    .then(pool => {
+      console.log('this is the pool', pool);
+      assert.equal(pool[2].c[0], midAgeForPool + 1, "Midage increased by 1");
     });
   });
 

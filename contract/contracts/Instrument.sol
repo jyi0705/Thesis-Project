@@ -235,13 +235,9 @@ contract Instrument {
 
    */
   function collectDividend() returns (bool) {
-    // TODO : collect dividend, 
-    // called by user
+
     var amount = pendingDividends[msg.sender];
       if (amount > 0) {
-          // It is important to set this to zero because the recipient
-          // can call this function again as part of the receiving call
-          // before `send` returns
 
           pendingDividends[msg.sender] = 0;
 
