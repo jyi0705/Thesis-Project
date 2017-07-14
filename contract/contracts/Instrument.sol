@@ -23,7 +23,7 @@ contract Instrument {
   mapping(address => Participant) waitlist;
   address public owner;
   mapping(address => uint) dividends;
-  mapping(address => uint) pendingDividends;
+  mapping(address => uint) public pendingDividends;
 
   /* Events */
   event Log(
@@ -200,20 +200,21 @@ contract Instrument {
   /**
 
    */
-  function releaseDividend() {
+  function releaseDividends() {
     // TODO : release dividend, 
     // called by admin
     // require(owner === msg.sender);
-
     for (var p = 0; p < pools.length; p++) {
       if(pools[p].midAge >= 70) {
         uint size = pools[p].participants.size;
-        Log(msg.sender, size, 'this is the siez');
+        Log(msg.sender, totalEth,'this is the totalEth');
         uint totalEth = pools[p].totalEth;
         for (var i = IterableMapping.iterate_start(pools[p].participants); IterableMapping.iterate_valid(pools[p].participants, i); i = IterableMapping.iterate_next(pools[p].participants, i))
         {
+        Log(msg.sender, size, 'this is the siez');
           var (addr, val)  = IterableMapping.iterate_get(pools[p].participants, i);
-          dividends[addr] = totalEth / (size * 20);
+          pendingDividends[addr] = totalEth / (size * 20);
+          Log(msg.sender, pendingDividends[addr], 'this is the dividents to each address');
         }
       }
       pools[p].midAge++;
@@ -229,21 +230,6 @@ contract Instrument {
   //   //     }
   //   //   }
   //   // }
-
-  //     var amount = pendingDividends[msg.sender];
-  //     if (amount > 0) {
-  //         // It is important to set this to zero because the recipient
-  //         // can call this function again as part of the receiving call
-  //         // before `send` returns.
-  //         pendingDividends[msg.sender] = 0;
-
-  //         if (!msg.sender.send(amount)) {
-  //             pendingDividends[msg.sender] = amount;
-  //             return false;
-  //         }
-  //     }
-  //     return true;
-  // }
 
   /**
 

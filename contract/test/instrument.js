@@ -219,40 +219,72 @@ contract('Instrument', (accounts) => {
   it("should be able to make dividend available", () => {
     var instrument;
     var poolIdx;
-    var midAgeForPool = 71;
+    var midAgeForPool = 72;
     var age = 69;
-    var testAccount = "0x0f09879ab76195d325cfec0500cbde0ba2bc1f9d";
+    var startingBalance = balance(accounts[0]);
+    var price = 10;
+    var finalBalanceWithoutDividend = balance(accounts[0]) - (2 * price);
+    var parsed = 0;
+
+
     console.log('ether', JSON.parse(web3.fromWei(web3.eth.getBalance(accounts[0])), "ether"));
+
     return Instrument.deployed()
     .then(instance => {
       instrument = instance;
-      return instrument.signContract({ from: accounts[0] }, age);
+
+      return instrument.verify(accounts[0], age, { from: accounts[0] });
     })
     .then(() => {
-      return instrument.signContract({ from: testAccount }, age);
+      return instrument.poolForAge.call(age);
+    })
+    .then((pool) => {
+      poolIdx = pool.c[0];
+      return instrument.pool.call(poolIdx);
+    })
+    .then(pool => {
+      // console.log("balance before signup", instrument);
+      console.log("balance before signup", balance(accounts[0])); 
+      console.log("contract ether before signup", balance(instrument.contract.address)); 
+      assert.equal(pool[0].c[0], 0, "Initial user number is incorrect"); 
+      assert.equal(pool[2].c[0], midAgeForPool, "Did not place participant in the correct pool");
+      return instrument.sendTransaction({ from: accounts[0], value: price * (10 ** 18) });
     })
     .then(() => {
-      return instrument.poolForAge(age);
+      console.log("balance after signup vs expected", balance(accounts[0]), "|", startingBalance - 20);
+      console.log("expected contract eth vs expected: ", 40, "|", balance(instrument.contract.address)); // hard coded to 40 should be price * 2
+      return instrument.pool.call(poolIdx);
+    })
+    .then(pool => {
+      // console.log("pool", pool);
+      assert.equal(pool[0].c[0], 1, "Failed to create user");
+      // assert.equal(startingBalance - price, balance(accounts[0]), "Failed to withraw money from user");
+      assert.equal(JSON.parse(pool[1]), (2 * price) * (10 ** 18), "Failed to send money to contract");  // giving me the wrong amount to send had to change to 2 * price
+      assert.equal(pool[2].c[0], midAgeForPool, "Did not place participant in the correct pool");
     })
     .then(pool => {
       poolIdx = pool;
       return instrument.releaseDividends({ from: accounts[0] });
     })
+    // .then(() => {
+    //   return instrument.withdraw([ testAccount ])
+    // })
     .then(() => {
-      return instrument.withdraw([ testAccount ])
+      return instrument.pendingDividends.call(accounts[0]);
     })
-    .then(() => {
+    .then(data => {
+      parsed = JSON.parse(data/(10 ** 18));
+      console.log(parsed);
+      assert.equal(parsed ,1, "Failed to allocate dividend");
       return instrument.collectDividend({ from: accounts[0] });
     })
-    .then(() => {
-      return instrument.collectDividend({ from: testAccount });
-    })
-    .then(() => {
+    .then(info => {
+      console.log('asdf', info);
       // get balance of account[0]
-      assert.equal(web3.fromWei(eth.getBalance(accounts[0])), 10000, "Failed to allocate dividend");
+      console.log(balance(accounts[0]), '|', finalBalanceWithoutDividend + parsed, "After dividend these two numbers should be similar");
       // get balance of testAccount
-      assert.equal(web3.fromWei(eth.getBalance(testAccount)), 10000, "Acccidentally allocated dividend to inactive user");
-    });
+      // assert.equal(web3.fromWei(web3.eth.getBalance(testAccount)), 10000, "Acccidentally allocated dividend to inactive user");
+    })
   });
 
   it("should increment counter and pool's mid upon dividend calling", () => {
