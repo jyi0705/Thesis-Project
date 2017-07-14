@@ -1,14 +1,4 @@
 import React, { Component } from 'react';
-<<<<<<< c7097bc165039605d5dd73943a87584a3335d5ff
-
-const UserPoolInfo = () => (
-  <div>
-  Your Pool Info
-  </div>
-)
-
-export default UserPoolInfo;
-=======
 import { getEthPrice } from '../../Actions/User/UserActions.js'
 import { connect } from 'react-redux'
 
@@ -44,4 +34,3 @@ const mapStateToProps = state => ({
 })
 
 export default connect(mapStateToProps, { getEthPrice })(UserPoolInfo);
->>>>>>> working with redux
