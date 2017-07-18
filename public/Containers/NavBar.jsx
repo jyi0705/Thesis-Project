@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import React from 'react'
 
-let admin = true;
+let admin = false;
 
 const NavBar = () => {
 

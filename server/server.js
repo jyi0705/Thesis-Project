@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const express = require('express'),
 parser = require('body-parser'),
 PORT = process.env.PORT || 3000,
@@ -7,6 +8,17 @@ userRoutes = require('./userRoutes'),
 adminRoutes = require('./adminRoutes'),
 env = process.env.NODE_ENV || 'development',
 config = require('../database/config').config[env];
+=======
+const express = require('express');
+const parser = require('body-parser');
+const PORT = process.env.PORT || 3000;
+const morgan = require('morgan');
+const mongoose = require('mongoose')
+const userRoutes = require('./userRoutes')
+const adminRoutes = require('./adminRoutes')
+const env = process.env.NODE_ENV || 'development';
+const config = require('../config')[env]
+>>>>>>> fixed the database
 
 mongoose.connect(config.url);
 
