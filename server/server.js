@@ -24,7 +24,12 @@ mongoose.connect(config.url);
 
 var db = mongoose.connection;
 
+<<<<<<< HEAD
 db.on('error', console.error.bind(console, 'connection error:'));
+=======
+
+db.on('error', console.error.bind(console, 'connection error:'))
+>>>>>>> add.yaml
 db.once('open', () => {
   console.log('Connected to DB')
 });
