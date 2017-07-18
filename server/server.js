@@ -1,35 +1,20 @@
-<<<<<<< HEAD
 const express = require('express'),
-parser = require('body-parser'),
-PORT = process.env.PORT || 3000,
-morgan = require('morgan'),
-mongoose = require('mongoose'),
-userRoutes = require('./userRoutes'),
-adminRoutes = require('./adminRoutes'),
-env = process.env.NODE_ENV || 'development',
-config = require('../database/config').config[env];
-=======
-const express = require('express');
-const parser = require('body-parser');
-const PORT = process.env.PORT || 3000;
-const morgan = require('morgan');
-const mongoose = require('mongoose')
-const userRoutes = require('./userRoutes')
-const adminRoutes = require('./adminRoutes')
-const env = process.env.NODE_ENV || 'development';
-const config = require('../config')[env]
->>>>>>> fixed the database
+      parser = require('body-parser'),
+      PORT = process.env.PORT || 3000,
+      morgan = require('morgan'),
+      mongoose = require('mongoose'),
+      userRoutes = require('./userRoutes'),
+      adminRoutes = require('./adminRoutes'),
+      env = process.env.NODE_ENV || 'development',
+      config = require('../config')[env];
+
 
 mongoose.connect(config.url);
 
 var db = mongoose.connection;
 
-<<<<<<< HEAD
-db.on('error', console.error.bind(console, 'connection error:'));
-=======
 
 db.on('error', console.error.bind(console, 'connection error:'))
->>>>>>> add.yaml
 db.once('open', () => {
   console.log('Connected to DB')
 });
