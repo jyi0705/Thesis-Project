@@ -43,7 +43,7 @@ class ApprovalPage extends Component {
 
   render(){
     return(
-      <div className="container">
+      <div id="approval" className="container">
         <section id="content">
           <form action="">
             <h1>Get Verified</h1>

@@ -16,6 +16,7 @@ import SmartContract from '../Containers/User/SmartContract.jsx';
 import { getEthPrice, getPoolInfo, isVerified } from '../Actions/User/UserActions.js';
 import { isAdmin } from '../Actions/Admin/AdminActions.js';
 import Footer from '../Components/Footer/Footer.jsx'
+import Navbar from '../Components/Navbar/Navbar.jsx'
 
 class App extends Component {
   constructor(props) {
@@ -40,7 +41,7 @@ class App extends Component {
     <Provider store={store}>
     <HashRouter>
       <div>
-        <NavBar admin={this.props.admin.isAdmin}/>
+        <Navbar admin={this.props.admin.isAdmin}/>
         <Switch>
           <Route exact path="/" component={Home}/>
           <Route path="/approval" component={ApprovalPage}/>
@@ -51,7 +52,7 @@ class App extends Component {
           <Route path="/admin" component={Admin}/>
           <Route path="/userPoolInfo" component={UserPoolInfo}/>
           <Route path="/smartContract" component={SmartContract}/>
-          <Route path="/contactUs" component={ContactUs}/>
+          <Route path="/contact" component={ContactUs}/>
         </Switch>
         <Footer />
       </div>

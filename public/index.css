@@ -1,8 +1,41 @@
 @import url(https://fonts.googleapis.com/css?family=Montserrat:700);
 
-.activeNav{
-  color: #555 !important;
-  background-color: #e7e7e7 !important;
+#contributing{
+  padding-top: 61px;
+}
+
+#about{
+  padding-top: 61px;
+}
+
+#home{
+  padding-top: 61px;
+}
+
+#pool-info{
+  padding-top: 61px;
+}
+
+#admin{
+  padding-top: 61px;
+}
+
+#contact{
+  padding-top: 100px;
+}
+
+#approval{
+  padding-top: 100px;
+}
+
+#documentation{
+  padding-top: 61px;
+  width: 70%;
+  margin: 0 auto;
+}
+
+.top-of-page {
+  padding-top: 61px;
 }
 
 

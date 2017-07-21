@@ -48,7 +48,7 @@ class ContactUs extends Component {
 
   render(){
     return(
-  <div className="container">
+  <div className="container" id="contact">
     <section id="content">      
         <form>
           <h1>Contact Us</h1>
