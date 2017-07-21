@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 import { Provider, connect } from 'react-redux';
 import Landing from '../Components/User/LandingPage.jsx';
-import ApprovalPage from '../Components/User/ApprovalPage.jsx';
+import ApprovalPage from '../Components/User/ApprovalPage/ApprovalPage.jsx';
 import Contributing from '../Containers/User/Contributing';
 import About from '../Components/User/About.jsx';
 import FAQ from '../Containers/User/FAQ.jsx';
 import TokenDetail from '../Components/User/TokenDetail.jsx';
 import Admin from '../Containers/Admin/Admin';
 import NavBar from '../Containers/NavBar';
+import ContactUs from '../Components/User/ContactUs/ContactUs.jsx';
 import Home from '../Components/Home/Home.jsx'
 import UserPoolInfo from '../Containers/User/UserPoolInfo';
 import SmartContract from '../Containers/User/SmartContract.jsx';
@@ -50,6 +51,7 @@ class App extends Component {
           <Route path="/admin" component={Admin}/>
           <Route path="/userPoolInfo" component={UserPoolInfo}/>
           <Route path="/smartContract" component={SmartContract}/>
+          <Route path="/contactUs" component={ContactUs}/>
         </Switch>
         <Footer />
       </div>
