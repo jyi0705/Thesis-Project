@@ -41,6 +41,7 @@
     "redux-promise": "^0.5.3",
     "redux-thunk": "^2.2.0",
     "sass-loader": "^6.0.6",
+    "sendgrid": "^5.2.0",
     "solc": "^0.4.13",
     "stringify": "^5.1.0",
     "style-loader": "^0.18.2",
