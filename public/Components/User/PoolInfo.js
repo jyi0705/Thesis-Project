@@ -22,7 +22,7 @@ class PoolInfo extends Component {
       poolMidAge: this.props.userPoolInfoObj.poolMidAge,
       numPoolPart: this.props.userPoolInfoObj.numPoolPart,
       ethAmount: (this.props.userPoolInfoObj.ethAmount / Math.pow(10, 18)),
-      ethPrice: this.props.userPoolInfoObj.ethPrice
+      ethPrice: this.props.userPoolInfoObj.ethPrice,
     }
     this.handleGetDivClick = this.handleGetDivClick.bind(this)
   }
@@ -41,17 +41,24 @@ class PoolInfo extends Component {
   }
 
   handleGetDivClick() {
-    const { web3 } = this.props;
-    
-    web3.Instrument.deployed().then(instance => {
-      return instance.collectDividend({from: web3.Account})
+    this.props.web3.Instrument.deployed().then(instance => {
+      return instance.collectDividend({from: this.props.web3.Account })
     })
-    .then(res => {
-      console.log(res)
+    .then((res) => {
+      if(res) {
+        this.setState({
+          currentDiv: 0
+        })
+      }
     })
   }
 
   render() {
+    let getDivButton = null;
+
+    if(this.state.currentDiv > 0) {
+      getDivButton = <button onClick={this.handleGetDivClick}>Get Your Dividend</button>
+    }
     return (
       <div>
         <ul>
@@ -61,7 +68,7 @@ class PoolInfo extends Component {
           <li>Current Eth Price: ${this.state.ethPrice}</li>
           <li>Current Dividend: {this.state.currentDiv} ETH</li>
         </ul>
-        <button onClick={this.handleGetDivClick}>Get Your Dividend</button>
+          {getDivButton}
       </div>
     )
   }

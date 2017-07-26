@@ -27,8 +27,10 @@ export const getPoolInfo = async (Instrument, Account) => {
     console.log('the instrument inside user actions line 27', instrument)
     return instrument.poolForAddress.call({from: Account});
   }).then((indexObj) => {
+    // let indexObjParse = JSON.parse(indexObj)
     poolIdx = JSON.parse(indexObj[0])
     isFound = JSON.parse(indexObj[1])
+    console.log('json index parse', indexObj)
     console.log('the poolInd inside user actions line 31', poolIdx)
     console.log('the isFound inside user actions line 31', isFound)
     return instrument.pool.call(poolIdx);
