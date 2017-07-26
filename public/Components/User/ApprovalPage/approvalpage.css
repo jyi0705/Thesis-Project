@@ -1,20 +1,76 @@
-img.down-arw {
-  width: 2%;
-}
-
-.container{
+ .page-anchors {
   display: flex;
-  justify-content: center;
+  justify-content: center; 
+  /* margin: 0 0 0 325px;    */
+  font-size: 16px;
+  flex-direction: row;
   align-items: center;
+}  
+
+div.anchor-containers{ 
+  /* margin-right: -264px;  */
+  justify-content: center;
+  text-align: right;
+  margin-right: 40px;
 }
 
+div.verification-containers{
+  justify-content: center;
+  text-align: left;
+  margin-left: 40px;
+}
 
-li{
+img.down-arw-swab {
+  width: 5%;
+  /* margin-left: 47px; */
+  display: block;
+  /* margin: 0 auto; */
+  float: right;
+  margin-right: 60px;
+  margin-top: 5px;
+}
+
+img.down-arw-verification {
+  width: 5%;
+  /* margin-left: 47px; */
+  display: block;
+  left: 0;
+  margin-left: 48px; 
+  margin-top: 5px;
+}
+
+a.link-route{
+  color: inherit;
+  text-decoration: none;
+}
+
+ a.link-route:hover {
+  text-decoration: none;
+  color: inherit;
+}
+
+img.down-arw-verification:hover{ 
+  position: relative; 
+  top: 5px;
+}
+
+img.down-arw-swab:hover{ 
+  position: relative; 
+  top: 5px;
+} 
+
+
+li.swab-route {
+  list-style-type: none;
+}
+
+li.verification-route {
   list-style-type: none;
 }
 
 .page-header{
   text-align:center;
+  margin: 40px 0 70px;
 }
 
 .page-title{
@@ -55,7 +111,7 @@ li{
 .container h1{
   font-weight: 400;
   margin-bottom: 40px;
-  margin-top: 0px;
+  margin-top: 110px;
 }
 
 .submit-btn {
@@ -90,6 +146,7 @@ button.submit-btn:active {
 
 .swab {
   padding-top: 76px;
+  text-align: center;
 }
 
 .swab-inst{

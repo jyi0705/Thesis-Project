@@ -51,30 +51,33 @@ class ApprovalPage extends Component {
         <div className="page-header">
           <h1 className="page-title">Get Age Verified</h1>
           <h2 className="page-subtitle">Submit your mouth swab and fill out our general form. <br/> We will verify you within 3 business days</h2>
-          <div className="page-anchors">
-            <div className="container">
-              <li className="swab-route">Swab Instructions</li>
-              <img src='Components/User/ApprovalPage/downArrow.png' className="down-arw"/>
-            </div>
-            <div>
-              <li className="verification-route"><a href="#approval">Verification Form</a></li>
-              <img src='Components/User/ApprovalPage/downArrow.png' className="down-arw"/>
-            </div>
-          </div>
         </div>
-        <div id="approval" className="container">
-              <h1>Verification Form</h1>
-          <section id="content">
-            <form>
-              <div>
-                <input 
-                  className="formStyle"
-                  name="walletId" 
-                  type="text" 
-                  placeholder="Enter Ethereum Wallet" 
-                  required="" 
-                  onChange={this.handleInputChange}/>
-              </div>
+
+          <div className="page-anchors">
+             <div className="anchor-containers"> 
+              <a className="link-route" onClick={() => {document.getElementById('swab-instructions').scrollIntoView(true)}}><li className="swab-route">Swab Instructions</li>
+              <img src='Components/User/ApprovalPage/downArrow.png' className="down-arw-swab"/></a>
+             </div>
+            <div className="verification-containers"> 
+              <a className="link-route" onClick={() => {document.getElementById('verification-form').scrollIntoView(true)}}><li className="verification-route">Verification Form</li>
+              <img src='Components/User/ApprovalPage/downArrow.png' className="down-arw-verification"/></a>
+             </div> 
+          </div>
+
+
+        <div id="verification-form" className="container">
+          <h1>Verification Form</h1>
+            <section id="content">
+              <form>
+                <div>
+                  <input 
+                    className="formStyle"
+                    name="walletId" 
+                    type="text" 
+                    placeholder="Enter Ethereum Wallet" 
+                    required="" 
+                    onChange={this.handleInputChange}/>
+                </div>
               <div>
                 <input 
                   className="formStyle"
@@ -97,19 +100,22 @@ class ApprovalPage extends Component {
                 <button type="submit" className="submit-btn" onClick={events => {events.preventDefault(); this.handleSubmitClick(this.state)}}>Submit</button>
               </div>
             </form>
+              <br />
+              <br />
           </section>
-            <br />
-            <br />
-            <div className="swab">
-            <h2>MOUTH SWAB INSTRUCTIONS:</h2>
-            <h5 className="important-warning">IMPORTANT: Donors should not place anything (including food, drink, gum or tobacco products) in their mouth for at least 10 minutes prior to the procedure. DO NOT BITE, SUCH OR CHEW ON THE SPONGE! Refrain from talking while collection swab is in the mouth.</h5>
-            <ol className="swab-inst">
-              <li className="inst-list">With the swab, sweep the inside of mouth several times, then hold swab in closed mouth until the color on the saturation indicator strip appears in the indicator window.</li>
-              <li className="inst-list">Remove collection swab from mouth and insert sponge, pushing until the locking flange locks in place in the bottom of the device. </li>
-              <li className="inst-list">Once locked in place, the device is airtight, tamper evident, and ready to dispose of after use or send to lab for confirmation (on non-negative results)</li>
-              <li className="inst-list">Send sample to 6060 Center Drive, Los Angeles CA 90025</li>
-            </ol>
-            </div>
+              <div className="swab">
+              <h2 id="swab-instructions">MOUTH SWAB INSTRUCTIONS:</h2>
+              <br/>
+              <h5 className="important-warning">IMPORTANT: Donors should not place anything (including food, drink, gum or tobacco products) in their mouth for at least 10 minutes prior to the procedure. DO NOT BITE, SUCH OR CHEW ON THE SPONGE! Refrain from talking while collection swab is in the mouth.</h5>
+              <br/>
+              <br/>
+              <ol className="swab-inst">
+                <li className="inst-list">With the swab, sweep the inside of mouth several times, then hold swab in closed mouth until the color on the saturation indicator strip appears in the indicator window.</li>
+                <li className="inst-list">Remove collection swab from mouth and insert sponge, pushing until the locking flange locks in place in the bottom of the device. </li>
+                <li className="inst-list">Once locked in place, the device is airtight, tamper evident, and ready to dispose of after use or send to lab for confirmation (on non-negative results)</li>
+                <li className="inst-list">Send sample to 6060 Center Drive, Los Angeles CA 90025</li>
+              </ol>
+              </div>
         </div>
       </div>
     )
