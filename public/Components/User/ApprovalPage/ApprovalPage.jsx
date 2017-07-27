@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import './approvalpage.css';
 import { Link } from 'react-router-dom';
+import swal from 'sweetalert2';
+import '../../../../node_modules/sweetalert2/src/colors.scss';
+import '../../../../node_modules/sweetalert2/src/sweetalert2.scss';
 // import downArrow from './downArrow.png';
 
 
@@ -26,16 +29,32 @@ class ApprovalPage extends Component {
     })
       .then(userInfo => {
         if(userInfo.data.success){
-          alert('You have been created');
+          swal({
+            title: 'You have been created!',
+            text: 'You have been created!',
+            type: 'success',
+            confirmButtonText: 'Ok!'
+          })
+          // swal('You have been created', 'success');
         } else {
-          alert('You already exist in the database');
+          swal({
+            title: 'You already exist in the database',
+            text: 'You already exist in the database',
+            type: 'error',
+            confirmButtonText: 'Try Again!'
+          })
         }
       })
       .catch(err => {
         console.log(err);
       })
     } else {
-      alert('You have to be at least 20 years old');
+      swal({
+            title: 'You must be at least 20 years old',
+            text: 'You must be at least 20 years old',
+            type: 'error',
+            confirmButtonText: 'Try Again!'
+          })
     }
   }
 

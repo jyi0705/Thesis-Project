@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import './contactus.css';
 import axios from 'axios';
+import swal from 'sweetalert2';
+import '../../../../node_modules/sweetalert2/src/sweetalert2.scss';
+import '../../../../node_modules/sweetalert2/src/colors.scss';
 
 class ContactUs extends Component {
   constructor(props){
@@ -38,10 +41,16 @@ class ContactUs extends Component {
   }
 
   onSubmit() {
-    console.log('submitted');
+    // console.log('submitted');
+    swal({
+      title: 'You will hear back withing 48 hours',
+      text: 'You will hear back within 48 hours',
+      type: 'success',
+      confirmButtonText: 'OK!'
+    })
     axios.post('/api/user/contact', this.state)
     .then(result => {
-      alert(result);
+      console.log(result);
     })
     .catch(error => {
       console.log('post error', error);

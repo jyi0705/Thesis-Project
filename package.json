@@ -37,6 +37,7 @@
     "react-bootstrap": "^0.31.0",
     "react-dom": "^15.6.1",
     "react-redux": "^5.0.5",
+    "react-redux-sweetalert2": "0.0.2",
     "react-router-dom": "^4.1.1",
     "recharts": "^1.0.0-alpha.2",
     "redux": "^3.7.1",
@@ -47,6 +48,7 @@
     "solc": "^0.4.13",
     "stringify": "^5.1.0",
     "style-loader": "^0.18.2",
+    "sweetalert2": "^6.6.6",
     "truffle-contract": "^2.0.1",
     "web3": "^0.19.1",
     "webpack": "^3.0.0"

@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import swal from 'sweetalert2';
+import '../../../../node_modules/sweetalert2/src/colors.scss';
+import '../../../../node_modules/sweetalert2/src/sweetalert2.scss';
 
 class DeleteUser extends Component {
   constructor(props) {
@@ -29,7 +32,12 @@ class DeleteUser extends Component {
       
     }
     else {
-      alert('Address must be filled')
+      swal({
+        title: 'Address must be filled',
+        text: 'Address must be filled',
+        type: 'error',
+        confirmButtonText: 'Try Again!'
+      })
     }
   }
 

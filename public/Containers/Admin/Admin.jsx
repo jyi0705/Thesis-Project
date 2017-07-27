@@ -1,17 +1,21 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { connect } from 'react-redux'
-import { changeInputValue } from '../../Actions/Admin/UserDataActions.js'
-import { changeTestInputValue } from '../../Actions/Admin/VerifiedUserDataActions.js'
+import { connect } from 'react-redux';
+import { changeInputValue } from '../../Actions/Admin/UserDataActions.js';
+import { changeTestInputValue } from '../../Actions/Admin/VerifiedUserDataActions.js';
 import { account, web3, Instrument } from '../../web3.js';
 import VerifyUser from '../../Components/Admin/VerifyUser/VerifyUser';
 import DeleteUser from '../../Components/Admin/DeleteUser/DeleteUser';
-import GetDividend from '../../Components/Admin/GetDividend/GetDividend'
-import ReleaseDividend from '../../Components/Admin/ReleaseDividend/ReleaseDividend'
-import AdminNavBar from '../../Components/Admin/AdminNavBar'
-import UserData from '../../Components/Admin/UserData/UserData.js'
-import AddTestResults from '../../Components/Admin/AddTestResults/AddTestResults.js'
-import './admin.css'
+import GetDividend from '../../Components/Admin/GetDividend/GetDividend';
+import ReleaseDividend from '../../Components/Admin/ReleaseDividend/ReleaseDividend';
+import AdminNavBar from '../../Components/Admin/AdminNavBar';
+import UserData from '../../Components/Admin/UserData/UserData.js';
+import AddTestResults from '../../Components/Admin/AddTestResults/AddTestResults.js';
+import './admin.css';
+import swal from 'sweetalert2';
+import '../../../node_modules/sweetalert2/src/colors.scss';
+import '../../../node_modules/sweetalert2/src/sweetalert2.scss';
+
 
 
 class Admin extends Component {
@@ -33,7 +37,7 @@ class Admin extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:3000/api/admin/getDivDate')
+    axios.get('/api/admin/getDivDate')
       .then(res => {
         res = res.data
         if(res.success === true) {
@@ -59,7 +63,7 @@ class Admin extends Component {
       })
     })
     
-    axios.get('http://localhost:3000/api/admin/getNonVerifiedUsers')
+    axios.get('/api/admin/getNonVerifiedUsers')
       .then(users => {
         this.setState({
           initialUsersArr: users.data.users,
@@ -67,7 +71,7 @@ class Admin extends Component {
         })
       })
     
-    axios.get('http://localhost:3000/api/admin/getVerifiedUsers')
+    axios.get('/api/admin/getVerifiedUsers')
       .then(users => {
         this.setState({
           initialVerifiedUsersArr: users.data.users,
@@ -100,7 +104,7 @@ class Admin extends Component {
     userAge = parseInt(userAge)
     isLiving = (isLiving === 'true')
 
-    axios.put('http://localhost:3000/api/admin/verifyUser', {
+    axios.put('/api/admin/verifyUser', {
       walletId: userAddress,
       isLiving: isLiving,
       age: userAge,
@@ -110,16 +114,31 @@ class Admin extends Component {
       const updatedUser = res.data
       console.log(updatedUser)
       if(!updatedUser.success) {
-        alert(updatedUser.message)
+        swal({
+          title: 'You have been created!',
+          text: updatedUser.message,
+          type: 'success',
+          confirmButtonText: 'Ok!'
+        })
       } else if(!updatedUser.updatedUser.isDeleted && !updatedUser.updatedUser.verified && isLiving) {
         this.props.web3.Instrument.deployed().then(instance => {
           instrument = instance;
           return instrument.verify(userAddress, userAge, { from: this.props.web3.Account });
         })
       } else if(updatedUser.updatedUser.isDeleted) {
-        alert('User used to be in a contract, but has been removed from contract for a reason')
+          swal({
+            title: 'User used to be in a contract, but has been removed from contract for a reason',
+            text: 'User used to be in a contract, but has been removed from contract for a reason',
+            type: 'error',
+            confirmButtonText: 'OK!'
+          })
       } else if(updatedUser.updatedUser.verified) {
-        alert('User has already been verified in the database')
+          swal({
+            title: 'User has already been verified in the database',
+            text: 'User has already been verified in the database',
+            type: 'error',
+            confirmButtonText: 'OK!'
+          })
       }
     })
     //TESTING STUFF:
@@ -129,7 +148,7 @@ class Admin extends Component {
       return instrument.verify(userAddress, userAge, { from: this.props.web3.Account });
     })
 
-    axios.get('http://localhost:3000/api/admin/getNonVerifiedUsers')
+    axios.get('/api/admin/getNonVerifiedUsers')
       .then(users => {
         this.setState({
           initialUsersArr: users.data.users,
@@ -144,7 +163,7 @@ class Admin extends Component {
     userAge = parseInt(userAge)
     isLiving = (isLiving === 'true')
 
-    axios.put('http://localhost:3000/api/admin/addTestResult', {
+    axios.put('/api/admin/addTestResult', {
       walletId: userAddress,
       isLiving: isLiving,
       age: userAge,
@@ -154,7 +173,12 @@ class Admin extends Component {
       const updatedUser = res.data
       console.log(updatedUser)
       if(!updatedUser.success) {
-        alert(updatedUser.message)
+        swal({
+          title: 'You have been created!',
+          text: updatedUser.message,
+          type: 'success',
+          confirmButtonText: 'Ok!'
+        })
       } else if(!isLiving) {
           this.props.web3.Instrument.deployed().then(instance => {
             instrument = instance;
@@ -163,13 +187,23 @@ class Admin extends Component {
           .catch(err => {
             console.log(err)
           })
-        alert('User has been deleted from contract due to inactivity or is deceased')
+        swal({
+          title: 'User has been deleted from contract due to inactivity or is deceased',
+          text: 'User has been deleted from contract due to inactivity or is deceased',
+          type: 'error',
+          confirmButtonText: 'Try Again!'
+        })
       } else if(updatedUser.updatedUser.isDeleted) {
-        alert('User used to be in a contract, but has been removed from contract for a reason')
+        swal({
+          title: 'User used to be in a contract, but has been removed from contract for a reason',
+          text: 'User used to be in a contract, but has been removed from contract for a reason',
+          type: 'error',
+          confirmButtonText: 'Try Again!'
+        })
       }
     })
 
-    axios.get('http://localhost:3000/api/admin/getVerifiedUsers')
+    axios.get('/api/admin/getVerifiedUsers')
       .then(users => {
         this.setState({
           initialVerifiedUsersArr: users.data.users,
@@ -180,12 +214,17 @@ class Admin extends Component {
 
   handleDeleteSubmit(userAddress) {
 
-    axios.put('http://localhost:3000/api/admin/deleteUser', {
+    axios.put('/api/admin/deleteUser', {
       walletId: userAddress
     })
     .then(user => {
       if(!user) {
-        alert('User does not exist')
+        swal({
+          title: 'User does not exist',
+          text: 'User does not exist',
+          type: 'error',
+          confirmButtonText: 'Try Again!'
+        })
       } else {
         // TESTING STUFF:
         // take out the if statement if the user is in database to test
@@ -208,7 +247,7 @@ class Admin extends Component {
     this.setState({
       displayReleaseButton: false
     })
-    axios.post('http://localhost:3000/api/admin/releaseDiv')
+    axios.post('/api/admin/releaseDiv')
       .then(res => {
         res = res.data
         if(res.success) {
@@ -226,8 +265,12 @@ class Admin extends Component {
           .then((pools) => {
             console.log(pools);
           })
-
-          alert('Funds have been released')
+          swal({
+            title: 'Funds have been released!',
+            text: 'Funds have been released!',
+            type: 'success',
+            confirmButtonText: 'Ok!'
+          })
           const nextAvailableYear = (parseInt(res.timer.slice(0, 4)) + 1)
           const nextAvailableMonthAndDay = res.timer.slice(5, 10)
           const nextAvailableTime = res.timer.slice(11, 19)
@@ -235,7 +278,12 @@ class Admin extends Component {
             nextDate : `${nextAvailableMonthAndDay}-${nextAvailableYear} at ${nextAvailableTime}`
           })
         } else {
-          alert(res.message)
+            swal({
+              title: 'User does not exist',
+              text: res.message,
+              type: 'error',
+              confirmButtonText: 'Try Again!'
+            })
         }
       })
   }

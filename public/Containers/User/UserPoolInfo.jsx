@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
-import { getEthPrice, getPoolInfo, isVerified } from '../../Actions/User/UserActions.js'
-import { connect } from 'react-redux'
-import PoolInfo from '../../Components/User/PoolInfo/PoolInfo'
+import { getEthPrice, getPoolInfo, isVerified } from '../../Actions/User/UserActions.js';
+import { connect } from 'react-redux';
+import PoolInfo from '../../Components/User/PoolInfo/PoolInfo';
 // delete this after only here for testing purposes
-import Admin from '../Admin/Admin'
-import './UserPoolInfo.css'
+import Admin from '../Admin/Admin';
+import './UserPoolInfo.css';
+import swal from 'sweetalert2';
+import '../../../node_modules/sweetalert2/src/colors.scss';
+import '../../../node_modules/sweetalert2/src/sweetalert2.scss';
 
 class UserPoolInfo extends Component {
   constructor(props) {
@@ -38,7 +41,12 @@ class UserPoolInfo extends Component {
         console.log('transaction obj', transObj)
       })
       .catch(err => {
-        alert('Please use metamask to interact with contract!')
+        swal({
+          title: 'Please use metamask to interact with contract!',
+          text: 'Please use metamask to interact with contract!',
+          type: 'error',
+          confirmButtonText: 'Try Again!'
+        })
         console.log(err);
       })
     }

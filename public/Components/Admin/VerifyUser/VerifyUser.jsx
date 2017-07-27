@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import '../adminNavbar.css'
+import '../adminNavbar.css';
+import swal from 'sweetalert2';
+import '../../../../node_modules/sweetalert2/src/colors.scss';
+import '../../../../node_modules/sweetalert2/src/sweetalert2.scss';
 
 class VerifyUser extends Component {
   constructor(props) {
@@ -36,9 +39,13 @@ class VerifyUser extends Component {
       this.props.changeInputValue('')
     }
     else {
-      alert('Please completely fill out form')
+      swal({
+        title: 'Please completely fill out the form',
+        text: 'Please completely fill out the form',
+        type: 'error',
+        confirmButtonText: 'Try Again!'
+      })
     }
-    
   }
 
   render() {
