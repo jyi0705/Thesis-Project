@@ -4,6 +4,7 @@ import DateAndTimeClock from './DateAndTimeClock'
 import './poolInfo.css'
 import PoolTile from './PoolTile'
 import PriceChart from './PriceChart'
+import swal from 'sweetalert2';
 
 class PoolInfo extends Component {
   constructor(props) {
@@ -39,6 +40,12 @@ class PoolInfo extends Component {
       if(res) {
         this.setState({
           currentDiv: 0
+        })
+        swal({
+          title: 'Success',
+          text: 'Collected dividend! Check your metamask wallet!',
+          type: 'success',
+          confirmButtonText: 'Confirm'
         })
       }
     })
@@ -76,11 +83,11 @@ class PoolInfo extends Component {
       }
     ]
 
-    let getDivButton = null;
+    // let getDivButton = null;
 
-    if(this.state.currentDiv > 0) {
-      getDivButton = <button onClick={this.handleGetDivClick}>Get Your Dividend</button>
-    }
+    // if(this.state.currentDiv > 0) {
+    //   getDivButton = <button onClick={this.handleGetDivClick}>Get Your Dividend</button>
+    // }
     return (
       <div className="poolInfo">
         <div className="poolheader">
@@ -112,7 +119,7 @@ class PoolInfo extends Component {
                 title={feat.title} 
                 detail={feat.detail}
                 rowNum={"row2"}
-                getDiv={this.props.getDiv}
+                getDiv={this.handleGetDivClick}
               />
             )
           }

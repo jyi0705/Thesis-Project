@@ -19,11 +19,9 @@ class UserPoolInfo extends Component {
     
     this.togglePoolInfo = this.togglePoolInfo.bind(this)
     this.verifyButton = this.verifyButton.bind(this)
-    this.getDividend = this.getDividend.bind(this)
   }
 
   togglePoolInfo() {
-    let { userPool } = this.props;
     this.setState({
       showPoolInfo: true
     })
@@ -37,8 +35,9 @@ class UserPoolInfo extends Component {
         return instance.sendTransaction({ from: web3.Account, value: 10 * (Math.pow(10, 18)) })
       })
       .then((transObj) => {
-        this.props.getPoolInfo(web3.Instrument, web3.Account)
+        this.togglePoolInfo()
         console.log('transaction obj', transObj)
+
       })
       .catch(err => {
         swal({
@@ -50,20 +49,6 @@ class UserPoolInfo extends Component {
         console.log(err);
       })
     }
-
-  }
-
-  getDividend() {
-    this.props.web3.Instrument.deployed().then(instance => {
-      return instance.collectDividend({from: this.props.web3.Account })
-    })
-    .then((res) => {
-      if(res) {
-        this.setState({
-          adminDividend: 0
-        })
-      }
-    })
   }
   
   render() {
@@ -76,8 +61,8 @@ class UserPoolInfo extends Component {
     //   userView = <button onClick={this.togglePoolInfo}>Get Your Pool Info</button>
     // } 
     
-    if (userPool.isInPool) {
-      userView = <PoolInfo userPoolInfoObj={userPool} web3={web3} getDiv={this.getDividend}/> 
+    if (userPool.isInPool || this.state.showPoolInfo) {
+      userView = <PoolInfo userPoolInfoObj={userPool} web3={web3}/> 
     } else if(userPool.isVerified === true && userPool.isInPool === false) {
       userView = <div className="user-verify"><p>Your DNA has been verified!</p><button onClick={this.verifyButton}>Sign Contract</button></div>
     } else if(userPool.isVerified === false) {
