@@ -28,7 +28,6 @@ class VerifyUser extends Component {
 
   handleSubmit(event) {
     console.log(this.props.inputValue, this.state.userAge, this.state.isLiving)
-    event.preventDefault()
     const { handleVerifySubmit } = this.props;
     if(this.state.userAge >= 20 && this.props.inputValue !== '' && this.state.isLiving !== undefined) {
       handleVerifySubmit(this.props.inputValue, this.state.userAge, this.state.isLiving)
