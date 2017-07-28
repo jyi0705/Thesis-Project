@@ -30,18 +30,17 @@ class ApprovalPage extends Component {
       .then(userInfo => {
         if(userInfo.data.success){
           swal({
-            title: 'You have been created!',
+            title: 'Success',
             text: 'You have been created!',
             type: 'success',
-            confirmButtonText: 'Ok!'
+            confirmButtonText: 'Confirm'
           })
-          // swal('You have been created', 'success');
         } else {
           swal({
-            title: 'You already exist in the database',
+            title: 'Error',
             text: 'You already exist in the database',
             type: 'error',
-            confirmButtonText: 'Try Again!'
+            confirmButtonText: 'Dismiss'
           })
         }
       })
@@ -50,10 +49,10 @@ class ApprovalPage extends Component {
       })
     } else {
       swal({
-            title: 'You must be at least 20 years old',
+            title: 'Error',
             text: 'You must be at least 20 years old',
             type: 'error',
-            confirmButtonText: 'Try Again!'
+            confirmButtonText: 'Dismiss'
           })
     }
   }

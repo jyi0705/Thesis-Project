@@ -40,18 +40,18 @@ adminRouter.get('/:walletAddress', (req, res) => {
   Admin.findOne({ walletId: req.params.walletAddress.toLowerCase() })
     .exec( function(err, admin) {
       if (err) return console.log(err);
-      if (!admin) return res.json({ success: false, message: "admin doesn't exist", admin: admin });
+      if (!admin) return res.json({ success: false, message: "Admin doesn't exist", admin: admin });
       autho = true;
-      res.json({ success: true, message: 'admin', admin: admin });
+      res.json({ success: true, message: 'Admin', admin: admin });
     })
 })
 
 adminRouter.post('/', (req, res) => {
     const newAdmin = new Admin(req.body);
     newAdmin.save(function(err, admin) {
-      if (!admin) return res.json({success: false, message: 'admin already exists'})
+      if (!admin) return res.json({success: false, message: 'Admin already exists'})
       if (err) return console.log(err)
-      res.json({success: true, message: 'admin created', admin: admin});
+      res.json({success: true, message: 'Admin created', admin: admin});
     })
 })
 

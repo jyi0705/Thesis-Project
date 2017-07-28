@@ -15,11 +15,13 @@
   padding-left: 30px;
   justify-content: flex-start;
   align-items: center;
-  height: 432px;
+  height: 600px;
+  color: grey;
 }
 
 .view h1 {
   padding: 20px;
+  color: grey;
 }
 #admin {
   display: flex;

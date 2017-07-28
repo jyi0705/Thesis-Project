@@ -25,7 +25,8 @@ class Admin extends Component {
       clicked: '',
       displayReleaseButton: false,
       usersArr: [],
-      verifiedUsersArr: []
+      verifiedUsersArr: [],
+      adminDividend: 0
     }
 
     this.navBarClick = this.navBarClick.bind(this);
@@ -183,7 +184,7 @@ class Admin extends Component {
               title: 'Success',
               text: 'User has been deleted from contract due to inactivity or is deceased',
               type: 'success',
-              confirmButtonText: 'Ok!'
+              confirmButtonText: 'Confirm'
             })
           } else {
             swal({
@@ -210,14 +211,14 @@ class Admin extends Component {
             title: 'Success',
             text: updatedUser.message,
             type: 'success',
-            confirmButtonText: 'Ok!'
+            confirmButtonText: 'Confirm'
           })
         } else if(!updatedUser.success) {
           swal({
-            title: 'Fix this shit!',
+            title: 'Error',
             text: updatedUser.message,
             type: 'error',
-            confirmButtonText: 'Ok!'
+            confirmButtonText: 'Confirm'
           })
         } else if(updatedUser.updatedUser.isDeleted) {
           swal({
@@ -247,10 +248,10 @@ class Admin extends Component {
     .then(user => {
       if(!user) {
         swal({
-          title: 'User does not exist',
+          title: 'Error',
           text: 'User does not exist',
           type: 'error',
-          confirmButtonText: 'Try Again!'
+          confirmButtonText: 'Dismiss'
         })
       } else {
         if(!user.data.updatedUser.isDeleted) {
@@ -318,16 +319,16 @@ class Admin extends Component {
               title: 'Success',
               text: 'Funds have been released!',
               type: 'success',
-              confirmButtonText: 'Ok!'
+              confirmButtonText: 'Confrim'
             })
             console.log(pools);
           })
         } else {
             swal({
-              title: 'Cannot Release Dividend',
+              title: 'Error',
               text: res.message + ' ' + res.date,
               type: 'error',
-              confirmButtonText: 'Try Again!'
+              confirmButtonText: 'Dismiss'
             })
         }
       })
@@ -342,6 +343,12 @@ class Admin extends Component {
         this.setState({
           adminDividend: 0
         })
+        swal({
+          title: 'Success',
+          text: 'Collected dividend! Check your metamask wallet!',
+          type: 'error',
+          confirmButtonText: 'Confirm'
+        })
       }
     })
   }
@@ -353,7 +360,7 @@ class Admin extends Component {
   }
 
   render(){
-    let currentAdminView = <p>Welcome Admin!</p>;
+    let currentAdminView = <p className="welcomeAdmin">Welcome Admin!</p>;
     let userDataComp = null
 
     if(this.state.clicked === 'Verify a User') {

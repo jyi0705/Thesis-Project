@@ -1,0 +1,66 @@
+.userData {
+  margin-top: 10px;
+  height: 280px;
+  width: 100%;
+  padding-left: 
+}
+
+.userData table {
+    width: 85%;
+    height: 100%;
+    border-spacing: 0;
+    margin: 0 auto;
+}
+
+.userData thead, .userData tbody, .userData tr, .userData th, .userData td { display: block; }
+
+.userData thead {
+  font-weight: 500;
+}
+
+.userData thead tr {
+    /* fallback */
+    width: 97%;
+    /* minus scroll bar width */
+    width: -webkit-calc(100% - 16px);
+    width:    -moz-calc(100% - 16px);
+    width:         calc(100% - 16px);
+}
+
+.userData tr:after {  /* clearing float */
+    content: ' ';
+    display: block;
+    visibility: hidden;
+    clear: both;
+}
+
+.userData th {
+  text-align: center;
+  font-weight: bold;
+}
+.userData tbody {
+    height: 85%;
+    overflow-y: auto;
+}
+
+.userData tbody tr {
+  text-align: center;
+}
+.userData tbody label {
+  font-weight: normal;
+  color: #85BC8E;
+}
+.walletId {
+    width: 40%;  /* 19% is less than (100% / 5 cols) = 20% */
+    float: left;
+}
+
+.age {
+    width: 20%;  /* 19% is less than (100% / 5 cols) = 20% */
+    float: left;
+}
+
+.email {
+    width: 40%;  /* 19% is less than (100% / 5 cols) = 20% */
+    float: left;
+}

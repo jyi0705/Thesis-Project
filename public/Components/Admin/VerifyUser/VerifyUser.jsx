@@ -40,17 +40,17 @@ class VerifyUser extends Component {
     }
     else {
       swal({
-        title: 'Please completely fill out the form',
+        title: 'Error',
         text: 'Please completely fill out the form',
         type: 'error',
-        confirmButtonText: 'Try Again!'
+        confirmButtonText: 'Dismiss'
       })
     }
   }
 
   render() {
     return (
-      <div>
+      <div className="verifyUser">
         <form onSubmit={this.handleSubmit}>
           <table>
             <tbody>
