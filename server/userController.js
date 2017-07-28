@@ -22,7 +22,7 @@ module.exports = {
       .find({})
       .exec( function(err, users) {
         if (err) return console.log(err)
-        res.json({ success: true, message: 'all users', users: users })
+        res.json({ success: true, message: 'All users', users: users })
       });
   },
   getUserInfo: (req, res) => {
@@ -32,14 +32,14 @@ module.exports = {
       })
       .exec( function(err, user) {
         if (err) return console.log(err)
-        if (!user) return res.json({ success: false, message: "user doesn't exist", user: user })
+        if (!user) return res.json({ success: false, message: "User doesn't exist", user: user })
         res.json({ success: true, message: 'user', user: user })
       });
   },
   create: (req, res) => {
     const newUser = new User(req.body);
     newUser.save(function(err, user) {
-      if (!user) return res.json({success: false, message: 'user already exists'})
+      if (!user) return res.json({success: false, message: 'User already exists'})
       if (err) return console.log(err)
       
       fs.readFile('server/sign-up.html', 'utf8', (err, email) => {
@@ -60,7 +60,7 @@ module.exports = {
         });
       });
 
-      res.json({success: true, message: 'user created', user: user});
+      res.json({success: true, message: 'User created', user: user});
     });
   },
   getEthPrice: (req, res) => {
@@ -81,7 +81,7 @@ module.exports = {
           console.log("got an error: ", err);
         }
         else {
-          console.log("feedback sent");
+          console.log("Feedback Sent");
         }
     });
 

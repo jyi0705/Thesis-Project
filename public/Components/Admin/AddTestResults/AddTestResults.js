@@ -3,6 +3,7 @@ import '../adminNavbar.css';
 import swal from 'sweetalert2';
 import '../../../../node_modules/sweetalert2/src/colors.scss';
 import '../../../../node_modules/sweetalert2/src/sweetalert2.scss';
+import './AddTestResults.css'
 
 class AddTestResults extends Component {
   constructor(props) {
@@ -39,10 +40,10 @@ class AddTestResults extends Component {
     }
     else {
       swal({
-        title: 'Please completely fill out form',
+        title: 'Error',
         text: 'Please completely fill out form',
         type: 'error',
-        confirmButtonText: 'Try Again!'
+        confirmButtonText: 'Dismiss'
       })
     }
     
@@ -50,7 +51,7 @@ class AddTestResults extends Component {
 
   render() {
     return (
-      <div>
+      <div className="addTestResult">
         <form onSubmit={this.handleSubmit}>
           <table>
             <tbody>

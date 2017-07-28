@@ -27,8 +27,8 @@ module.exports = {
       { new: false },
       (err, updatedUser) => {
         if(err) return console.log('err', err)
-        if (!updatedUser) return res.json({ success: false, message: "user doesn't exist", user: updatedUser })
-        res.json({ success: true, message: 'updated user', updatedUser: updatedUser })
+        if (!updatedUser) return res.json({ success: false, message: "User doesn't exist", user: updatedUser })
+        res.json({ success: true, message: 'Updated user', updatedUser: updatedUser })
       }
     );
   },
@@ -51,7 +51,7 @@ module.exports = {
       { new: false },
       (err, updatedUser) => {
         if(err) return console.log('err', err)
-        if (!updatedUser) return res.json({ success: false, message: "user doesn't exist", user: updatedUser })
+        if (!updatedUser) return res.json({ success: false, message: "User doesn't exist", user: updatedUser })
         
         fs.readFile('server/verify.html', 'utf8', (err, email) => {
           var data = {
@@ -71,7 +71,7 @@ module.exports = {
           });
         });
 
-        res.json({ success: true, message: 'updated user', updatedUser: updatedUser })
+        res.json({ success: true, message: 'Updated user', updatedUser: updatedUser })
       }
     );
   },
@@ -86,8 +86,8 @@ module.exports = {
       { new: false },
       (err, updatedUser) => {
         if(err) return console.log('err', err)
-        if (!updatedUser) return res.json({ success: false, message: "user doesn't exist", user: updatedUser })
-        res.json({ success: true, message: 'updated user', updatedUser: updatedUser })
+        if (!updatedUser) return res.json({ success: false, message: "User doesn't exist", user: updatedUser })
+        res.json({ success: true, message: 'Updated user', updatedUser: updatedUser })
       }
     );
   },

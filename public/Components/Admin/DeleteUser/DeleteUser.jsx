@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import swal from 'sweetalert2';
 import '../../../../node_modules/sweetalert2/src/colors.scss';
 import '../../../../node_modules/sweetalert2/src/sweetalert2.scss';
-
+import './DeleteUser.css'
 class DeleteUser extends Component {
   constructor(props) {
     super(props)
@@ -33,17 +33,17 @@ class DeleteUser extends Component {
     }
     else {
       swal({
-        title: 'Address must be filled',
+        title: 'Error',
         text: 'Address must be filled',
         type: 'error',
-        confirmButtonText: 'Try Again!'
+        confirmButtonText: 'Dismiss'
       })
     }
   }
 
   render() {
     return (
-      <div>
+      <div className="deleteUserAdmin">
         <form onSubmit={this.handleSubmit}>
           <label>
             User's Wallet Address:  

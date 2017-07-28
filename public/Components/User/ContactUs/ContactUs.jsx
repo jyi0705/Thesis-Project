@@ -41,6 +41,7 @@ class ContactUs extends Component {
   }
 
   onSubmit() {
+<<<<<<< b7d56034f26bb786f54d0725e0c6a15d01122053
     console.log('submitted');
       swal({
         title: 'You will hear back withing 48 hours',
@@ -48,6 +49,15 @@ class ContactUs extends Component {
         type: 'success',
         confirmButtonText: 'OK!'
       })
+=======
+    // console.log('submitted');
+    swal({
+      title: 'Success',
+      text: 'You will hear back within 48 hours',
+      type: 'success',
+      confirmButtonText: 'Confirm'
+    })
+>>>>>>> Finished cssing admin page
     axios.post('/api/user/contact', this.state)
     .then(result => {
       console.log(result);
