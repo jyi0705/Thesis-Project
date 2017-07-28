@@ -41,7 +41,6 @@ class ContactUs extends Component {
   }
 
   onSubmit() {
-    // console.log('submitted');
     swal({
       title: 'Success',
       text: 'You will hear back within 48 hours',

@@ -161,7 +161,7 @@ class Admin extends Component {
         walletId: userAddress
       })    
       .then(user => {
-        if(!user) {
+        if(!user.data.success) {
           swal({
             title: 'Error',
             text: 'User does not exist',
@@ -206,26 +206,27 @@ class Admin extends Component {
         console.log(res)
         const updatedUser = res.data
         console.log(updatedUser)
-        if(updatedUser.success) {
+        if (!updatedUser.success) {
+          swal({
+            title: 'Error',
+            text: updatedUser.message,
+            type: 'error',
+            confirmButtonText: 'Dismiss'
+          })
+        }
+        if(updatedUser.updatedUser.isDeleted) {
+         swal({
+            title: 'Error',
+            text: 'User used to be in a contract, but has been removed from contract for a reason',
+            type: 'error',
+            confirmButtonText: 'Dismiss'
+          })
+        } else if(updatedUser.success) {
           swal({
             title: 'Success',
             text: updatedUser.message,
             type: 'success',
             confirmButtonText: 'Confirm'
-          })
-        } else if(!updatedUser.success) {
-          swal({
-            title: 'Error',
-            text: updatedUser.message,
-            type: 'error',
-            confirmButtonText: 'Confirm'
-          })
-        } else if(updatedUser.updatedUser.isDeleted) {
-          swal({
-            title: 'Error',
-            text: 'User used to be in a contract, but has been removed from contract for a reason',
-            type: 'error',
-            confirmButtonText: 'Dismiss'
           })
         }
       })
@@ -246,7 +247,7 @@ class Admin extends Component {
       walletId: userAddress
     })
     .then(user => {
-      if(!user) {
+      if(!user.data.success) {
         swal({
           title: 'Error',
           text: 'User does not exist',
@@ -265,9 +266,19 @@ class Admin extends Component {
           // .catch(err => {
           //   console.log(err)
           // })
-          alert('User has been deleted from contract due to inactivity or is deceased')
+          swal({
+            title: 'Success',
+            text: 'User has been deleted from contract due to inactivity or is deceased',
+            type: 'success',
+            confirmButtonText: 'Confirm'
+          })
         } else {
-          alert('User has already been deleted because they are deceased or for a admin reason')
+            swal({
+            title: 'Error',
+            text: 'User has already been deleted because they are deceased or for a admin reason',
+            type: 'error',
+            confirmButtonText: 'Dismiss'
+          })
         }
       }
     })
@@ -319,7 +330,7 @@ class Admin extends Component {
               title: 'Success',
               text: 'Funds have been released!',
               type: 'success',
-              confirmButtonText: 'Confrim'
+              confirmButtonText: 'Confirm'
             })
             console.log(pools);
           })
@@ -346,7 +357,7 @@ class Admin extends Component {
         swal({
           title: 'Success',
           text: 'Collected dividend! Check your metamask wallet!',
-          type: 'error',
+          type: 'success',
           confirmButtonText: 'Confirm'
         })
       }

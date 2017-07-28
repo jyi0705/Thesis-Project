@@ -31,7 +31,7 @@ class ApprovalPage extends Component {
         if(userInfo.data.success){
           swal({
             title: 'Success',
-            text: 'You have been created!',
+            text: 'You have been submitted. Please check your email for further instruction.',
             type: 'success',
             confirmButtonText: 'Confirm'
           })
