@@ -4,6 +4,48 @@ h5, h6 {
   display: inline;
 }​
 
+hr.donation-hr {
+  border-top: 1px solid black;
+  margin: 10px;
+}
+
+#donation-support hr{
+  border-top: 1px solid black;
+  margin: auto;
+  width: 70%;
+  padding: 10px;
+}
+
+.donation-address hr{
+  border-top: 1px solid black;
+  margin: auto;
+  width: 70%;
+  padding: 10px;
+}
+
+.donation-amount {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 5px;
+}
+
+div.wallet-address{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+div.donation-amount h4 {
+  margin-left: 30px;
+}
+
+div.amount-received{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
 h5{
   display:inline;
 }

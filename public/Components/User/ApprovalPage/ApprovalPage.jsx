@@ -123,16 +123,17 @@ class ApprovalPage extends Component {
               <br />
           </section>
               <div className="swab">
-              <h2 id="swab-instructions">MOUTH SWAB INSTRUCTIONS:</h2>
+              <h1 id="swab-instructions">MOUTH SWAB INSTRUCTIONS</h1>
+              <hr />
               <br/>
-              <h5 className="important-warning">IMPORTANT: Donors should not place anything (including food, drink, gum or tobacco products) in their mouth for at least 10 minutes prior to the procedure. DO NOT BITE, SUCH OR CHEW ON THE SPONGE! Refrain from talking while collection swab is in the mouth.</h5>
+              <h4 className="important-warning">IMPORTANT: Donors should not place anything (including food, drink, gum or tobacco products) in their mouth for at least 10 minutes prior to the procedure. DO NOT BITE, SUCH OR CHEW ON THE SPONGE! Refrain from talking while collection swab is in the mouth.</h4>
               <br/>
               <br/>
               <ol className="swab-inst">
-                <li className="inst-list">With the swab, sweep the inside of mouth several times, then hold swab in closed mouth until the color on the saturation indicator strip appears in the indicator window.</li>
-                <li className="inst-list">Remove collection swab from mouth and insert sponge, pushing until the locking flange locks in place in the bottom of the device. </li>
-                <li className="inst-list">Once locked in place, the device is airtight, tamper evident, and ready to dispose of after use or send to lab for confirmation (on non-negative results)</li>
-                <li className="inst-list">Send sample to 6060 Center Drive, Los Angeles CA 90025</li>
+                <li className="inst-list"><span>With the swab, sweep the inside of mouth several times, then hold swab in closed mouth until the color on the saturation indicator strip appears in the indicator window.</span></li>
+                <li className="inst-list"><span>Remove collection swab from mouth and insert sponge, pushing until the locking flange locks in place in the bottom of the device.</span></li>
+                <li className="inst-list"><span>Once locked in place, the device is airtight, tamper evident, and ready to dispose of after use or send to lab for confirmation (on non-negative results)</span></li>
+                <li className="inst-list"><span>Send sample to 6060 Center Drive, Los Angeles CA 90025</span></li>
               </ol>
               </div>
         </div>

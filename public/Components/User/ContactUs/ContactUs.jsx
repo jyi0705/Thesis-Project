@@ -41,13 +41,13 @@ class ContactUs extends Component {
   }
 
   onSubmit() {
-    // console.log('submitted');
-    swal({
-      title: 'You will hear back withing 48 hours',
-      text: 'You will hear back within 48 hours',
-      type: 'success',
-      confirmButtonText: 'OK!'
-    })
+    console.log('submitted');
+      swal({
+        title: 'You will hear back withing 48 hours',
+        text: 'You will hear back within 48 hours',
+        type: 'success',
+        confirmButtonText: 'OK!'
+      })
     axios.post('/api/user/contact', this.state)
     .then(result => {
       console.log(result);
@@ -98,8 +98,11 @@ class ContactUs extends Component {
           <button type="submit" className="submit-btn">Submit</button>
         </form>
     </section>
-      <div className="donation">
+      <div id="donation-support" className="donation">
           <h1 className="donation-title">Donate to support Development</h1>
+          <hr className="donation-hr"/>
+      </div>
+      <div>
             <p>
               <b>Gennuity's mission</b> is to provide individual's income and help accumulate assests during retirement.
               All funds received and any proposal to spend it are visible on the blockchain for anyone to see.
@@ -107,11 +110,12 @@ class ContactUs extends Component {
               so you'll know your donations will be well taken care of.
               </p>
             <div className="donation-address">
-              <h3>Donation Address</h3>
-              <div><h5>Wallet Address:</h5><h6 className="eth-wallet"> 0xfB6916095ca1df60bB79Ce92cE3Ea74c37c5d359</h6></div>
-            </div>
-            <div>
-              <div><h5>Amount Received:</h5><h6 className="eth-amount"> {this.state.ethPrice} Ether </h6></div>
+              <h2>Donation Address</h2>
+              <hr/>
+              <div className="donation-amount">
+                <div className="wallet-address"><h4>Wallet Address:</h4><h4 className="eth-wallet"> 0xfB6916095ca1df60bB79Ce92cE3Ea74c37c5d359</h4></div>
+                <div className="amount-received"><h4>Amount Received:</h4><h4 className="eth-amount"> {this.state.ethPrice} Ether </h4></div>
+              </div>
             </div>
       </div>
   </div>

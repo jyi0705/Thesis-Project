@@ -8,6 +8,15 @@
   padding:  40px;
 }  
 
+.swab hr {
+  border-top-color: slategray;
+  margin: 10px;
+}
+
+li.inst-list{
+  padding-left: 7px;
+}
+
 div.anchor-containers{ 
   /* margin-right: -264px;  */
   justify-content: center;
@@ -185,5 +194,9 @@ button.submit-btn:active {
 
 .important-warning {
   color: red;
-  margin: 38px 0px 32px 10px;
+  margin: 8px 0px 8px 10px;
+}
+
+ol.swab-inst{
+  font-size: 17px;
 }
