@@ -28,7 +28,6 @@ class AddTestResults extends Component {
   }
 
   handleSubmit(event) {
-    event.preventDefault()
     const { handleAddTestResultSubmit } = this.props;
     if(this.state.userAge >= 20 && this.props.testInputValue !== '' && this.state.isLiving !== undefined) {
       handleAddTestResultSubmit(this.props.testInputValue, this.state.userAge, this.state.isLiving)

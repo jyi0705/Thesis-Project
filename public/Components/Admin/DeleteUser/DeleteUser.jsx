@@ -22,7 +22,6 @@ class DeleteUser extends Component {
   }
 
   handleSubmit(event) {
-    event.preventDefault()
     const { handleDeleteSubmit } = this.props;
     if(this.state.walletAddress !== '') {
       handleDeleteSubmit(this.state.walletAddress)
