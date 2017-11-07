@@ -91,6 +91,7 @@ module.exports = {
     );
   },
   getNonVerifiedUsers: (req, res) => {
+    console.log('get non verified')
     User.find({
       verified: false,
       isDeleted: false
@@ -101,6 +102,7 @@ module.exports = {
     })
   },
   getVerifiedUsers: (req, res) => {
+    console.log('get non verified')
     User.find({
       verified: true,
       isDeleted: false

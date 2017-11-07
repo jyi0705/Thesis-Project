@@ -16,7 +16,7 @@ if (result.error) {
   throw result.error
 }
 
-mongoose.connect(config.url);
+mongoose.connect(process.env.DB_URL);
 var db = mongoose.connection;
 
 
@@ -29,17 +29,17 @@ const app = express()
   .use(parser.json())
   .use(parser.urlencoded({ extended: true }))
   .use(morgan('dev'))
+  .use(express.static('public'))
+  .use('/api/user', userRoutes)
+  .use('/api/admin', adminRoutes)
   .get('*.js', (req, res, next) => {
     req.url = req.url + '.gz';
     res.set('Content-Encoding', 'gzip');
     next();
   })
-  .use(express.static('public'))
   .get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../public/index.html'))
   })
-  .use('/api/user', userRoutes)
-  .use('/api/admin', adminRoutes)
   .listen(PORT, () => {
     console.log(`Successfully connected to server on PORT: ${PORT}`)
   });

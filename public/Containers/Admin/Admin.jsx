@@ -45,7 +45,7 @@ class Admin extends Component {
           this.setState({
             displayReleaseButton: res.success
           })
-        } else {
+        } else if(res.date !== undefined) {
           const nextAvailableYear = (parseInt(res.date.slice(0, 4)) + 1)
           const nextAvailableMonthAndDay = res.date.slice(5, 10)
           const nextAvailableTime = res.date.slice(11, 19)
@@ -68,12 +68,11 @@ class Admin extends Component {
       .then(users => {
         this.setState({
           initialUsersArr: users.data.users,
-          usersArr: []
+          usersArr: users.data.users
         })
       })
     
     axios.get('/api/admin/getVerifiedUsers')
-      console.log(users,data,users)
       .then(users => {
         this.setState({
           initialVerifiedUsersArr: users.data.users,

@@ -2,7 +2,6 @@ import React from 'react';
 import './UserData.css'
 
 const UserData = ({filteredUserArr, clickHandler }) => {
-  console.log(filteredUserArr)
   return (
     <div className="userData">
     <table>
