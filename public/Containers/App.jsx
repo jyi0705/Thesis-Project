@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { HashRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { Provider, connect } from 'react-redux';
 import Landing from '../Components/User/LandingPage.jsx';
 import ApprovalPage from '../Components/User/ApprovalPage/ApprovalPage.jsx';
@@ -26,7 +26,6 @@ class App extends Component {
 
   componentDidMount() {
     const { getEthPrice, isVerified, web3, isAdmin, fetchNewData } = this.props;
-    console.log('this is the web3 account', web3.Account)
     isAdmin(web3.Account)
     getEthPrice()
     isVerified(web3.Account)
@@ -38,7 +37,7 @@ class App extends Component {
    
    return (
     <Provider store={store}>
-    <HashRouter>
+    <BrowserRouter>
       <div>
         <Navbar admin={this.props.admin.isAdmin}/>
         <Switch>
@@ -55,7 +54,7 @@ class App extends Component {
         </Switch>
         <Footer />
       </div>
-    </HashRouter>
+    </BrowserRouter>
     </Provider>
   );
  }

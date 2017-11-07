@@ -24,12 +24,12 @@ const Mission = (props) => (
       </p>
     </div>
     <div className="home-buttons">
-      <Link to="/about">
+      <a href="about">
         <button id="home-button1" type="submit" name="learn-more" value="Learn More" className="submit-btn">Learn More</button>
-      </Link>
-      <Link to="/approval">
+      </a>
+      <a href="approval">
         <button id="home-button2" type="submit" name="learn-more" value="Sign Up" className="submit-btn">Sign Up</button>
-      </Link>
+      </a>
     </div>
   </div> 
 );

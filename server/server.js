@@ -1,11 +1,12 @@
 const express = require('express'),
       parser = require('body-parser'),
-      PORT = process.env.PORT || 3000,
+      PORT = process.env.PORT || 3004,
       morgan = require('morgan'),
       mongoose = require('mongoose'),
       userRoutes = require('./userRoutes'),
       adminRoutes = require('./adminRoutes'),
       dotenv = require('dotenv'),
+      path = require('path')
       env = process.env.NODE_ENV || 'development',
       config = require('../config')[env];
 
@@ -27,11 +28,19 @@ db.once('open', () => {
 const app = express()
   .use(parser.json())
   .use(parser.urlencoded({ extended: true }))
-  .use(express.static('public'))
   .use(morgan('dev'))
+  .get('*.js', (req, res, next) => {
+    req.url = req.url + '.gz';
+    res.set('Content-Encoding', 'gzip');
+    next();
+  })
+  .use(express.static('public'))
+  .get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../public/index.html'))
+  })
   .use('/api/user', userRoutes)
   .use('/api/admin', adminRoutes)
-  .listen(PORT, 'localhost', () => {
+  .listen(PORT, () => {
     console.log(`Successfully connected to server on PORT: ${PORT}`)
   });
 

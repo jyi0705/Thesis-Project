@@ -68,11 +68,12 @@ class Admin extends Component {
       .then(users => {
         this.setState({
           initialUsersArr: users.data.users,
-          usersArr: users.data.users
+          usersArr: []
         })
       })
     
     axios.get('/api/admin/getVerifiedUsers')
+      console.log(users,data,users)
       .then(users => {
         this.setState({
           initialVerifiedUsersArr: users.data.users,
@@ -203,9 +204,7 @@ class Admin extends Component {
         age: userAge,
       })
       .then(res => {
-        console.log(res)
         const updatedUser = res.data
-        console.log(updatedUser)
         if (!updatedUser.success) {
           swal({
             title: 'Error',
@@ -305,7 +304,6 @@ class Admin extends Component {
     })
     axios.post('/api/admin/releaseDiv')
       .then(res => {
-        console.log(res.data)
         res = res.data
         if(res.success) {
           let instrument;

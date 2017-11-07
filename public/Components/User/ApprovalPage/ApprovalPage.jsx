@@ -66,7 +66,7 @@ class ApprovalPage extends Component {
   render(){
     return(
       <div>
-        <div className="page-header">
+        <div className="page-header" id="approval">
           <h1 className="page-title">Get Age Verified</h1>
           <h2 className="page-subtitle">Submit your mouth swab and fill out our general form. <br/> We will verify you within 3 business days</h2>
         </div>

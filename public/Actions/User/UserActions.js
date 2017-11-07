@@ -1,5 +1,5 @@
 import axios from 'axios';
-// import { account, web3, Instrument } from '../../web3.js'
+import { account, web3, Instrument } from '../../web3.js'
 export const GET_POOL_INFO = 'GET_POOL_INFO';
 export const GET_ETH_PRICE = 'GET_ETH_PRICE';
 export const IS_VERIFIED = 'IS_VERIFIED'
@@ -24,18 +24,13 @@ export const getPoolInfo = async (Instrument, Account) => {
   
   await Instrument.deployed().then(instance => {
     instrument = instance;
-    console.log('the instrument inside user actions line 27', instrument)
     return instrument.poolForAddress.call({from: Account});
   }).then((indexObj) => {
     // let indexObjParse = JSON.parse(indexObj)
     poolIdx = JSON.parse(indexObj[0])
     isFound = JSON.parse(indexObj[1])
-    console.log('json index parse', indexObj)
-    console.log('the poolInd inside user actions line 31', poolIdx)
-    console.log('the isFound inside user actions line 31', isFound)
     return instrument.pool.call(poolIdx);
   }).then((pool) => {
-    console.log('the pool inside user action line 34', pool)
     poolInfoObj.numPart = JSON.parse(pool[0])
     poolInfoObj.poolEthTotal = JSON.parse(pool[1])
     poolInfoObj.midAge = JSON.parse(pool[2])

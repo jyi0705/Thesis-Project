@@ -12,7 +12,6 @@ const mailgun = new Mailgun({
 module.exports = {
   addTestResultToUser: (req, res) => {
     const testResults = req.body;
-    console.log(req.body)
     User.findOneAndUpdate(
       { walletId: testResults.walletId.toLowerCase() }, 
       { 

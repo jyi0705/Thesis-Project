@@ -24,7 +24,6 @@ class ContactUs extends Component {
       }
     axios.get("https://api.etherscan.io/api?module=account&action=balance&address=0xde0B295669a9FD93d5F28D9Ec85E40f4cb697BAe&tag=latest&apikey=IUKZ7J9R48Z4EZAE6XG6VGAYIWU36RPZYQ")
       .then(price => {
-        console.log('this is the price', addCommas(price.data.result / Math.pow(10,18)));
         let priceOfEth = addCommas(price.data.result / Math.pow(10,18));
         this.setState({ethPrice: priceOfEth});
       })
@@ -37,7 +36,6 @@ class ContactUs extends Component {
     let state = {};
     state[event.target.name] = event.target.value;
     this.setState(state);
-    console.log(this.state)
   }
 
   onSubmit() {
@@ -49,10 +47,10 @@ class ContactUs extends Component {
     })
     axios.post('/api/user/contact', this.state)
     .then(result => {
-      console.log(result);
+      //console.log(result);
     })
     .catch(error => {
-      console.log('post error', error);
+      //console.log('post error', error);
     })
   }
 

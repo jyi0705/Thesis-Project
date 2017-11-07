@@ -9,10 +9,8 @@ class PriceChart extends Component {
     this.renderEthPrice = this.renderEthPrice.bind(this);
   }
   renderEthPrice(){
-    console.log('you are here!');
     // this.state.count++;
     let state = this;
-    console.log('this is the count', this.state.count);
     if(this.state.count === 0){
       let baseUrl = "https://widgets.cryptocompare.com/";
       let scripts = document.getElementsByTagName("script");

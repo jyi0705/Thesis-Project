@@ -26,7 +26,6 @@ class SmartContract extends Component {
 
 
   render() {
-    console.log('the state', this.state.toggle)
     return(
       
       <div id="documentation">
