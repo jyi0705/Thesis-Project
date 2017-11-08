@@ -53,16 +53,16 @@ class Admin extends Component {
             nextDate : `${nextAvailableMonthAndDay}-${nextAvailableYear} at ${nextAvailableTime}`
           })
         }
-      })
+    
 
-    this.props.web3.Instrument.deployed().then(instance => {
-      return instance.pendingDividends.call(this.props.web3.Account)
-    })
-    .then(res => {
-      this.setState({
-        adminDividend: (JSON.parse(res) / Math.pow(10, 18))
-      })
-    })
+    // this.props.web3.Instrument.deployed().then(instance => {
+    //   return instance.pendingDividends.call(this.props.web3.Account)
+    // })
+    // .then(res => {
+    //   this.setState({
+    //     adminDividend: (JSON.parse(res) / Math.pow(10, 18))
+    //   })
+    // })
     
     axios.get('/api/admin/getNonVerifiedUsers')
       .then(users => {
@@ -79,6 +79,7 @@ class Admin extends Component {
           verifiedUsersArr: users.data.users
         })
       })
+    })
   }
 
   componentWillReceiveProps(nextProps) {
@@ -121,10 +122,10 @@ class Admin extends Component {
           confirmButtonText: 'Dismiss'
         })
       } else if(!updatedUser.updatedUser.isDeleted && !updatedUser.updatedUser.verified && isLiving) {
-        this.props.web3.Instrument.deployed().then(instance => {
-          instrument = instance;
-          return instrument.verify(userAddress, userAge, { from: this.props.web3.Account });
-        })
+        // this.props.web3.Instrument.deployed().then(instance => {
+        //   instrument = instance;
+        //   return instrument.verify(userAddress, userAge, { from: this.props..Account });
+        // })
       } else if(updatedUser.updatedUser.isDeleted) {
           swal({
             title: 'Error',
@@ -306,31 +307,31 @@ class Admin extends Component {
         res = res.data
         if(res.success) {
           let instrument;
-          this.props.web3.Instrument.deployed().then(instance => {
-            const nextAvailableYear = (parseInt(res.timer.slice(0, 4)) + 1)
-            const nextAvailableMonthAndDay = res.timer.slice(5, 10)
-            const nextAvailableTime = res.timer.slice(11, 19)
-            this.setState({
-              nextDate : `${nextAvailableMonthAndDay}-${nextAvailableYear} at ${nextAvailableTime}`
-            })
-            instrument =  instance;
-            return instrument.releaseDividends({ from: this.props.web3.Account })
-          })
-          .then(() => {
-            var promises = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map(x => {
-              return instrument.pool.call(x);
-            })
-            return Promise.all(promises);
-          })
-          .then((pools) => {
-            swal({
-              title: 'Success',
-              text: 'Funds have been released!',
-              type: 'success',
-              confirmButtonText: 'Confirm'
-            })
-            console.log(pools);
-          })
+          // this.props.web3.Instrument.deployed().then(instance => {
+          //   const nextAvailableYear = (parseInt(res.timer.slice(0, 4)) + 1)
+          //   const nextAvailableMonthAndDay = res.timer.slice(5, 10)
+          //   const nextAvailableTime = res.timer.slice(11, 19)
+          //   this.setState({
+          //     nextDate : `${nextAvailableMonthAndDay}-${nextAvailableYear} at ${nextAvailableTime}`
+          //   })
+          //   instrument =  instance;
+          //   return instrument.releaseDividends({ from: this.props.web3.Account })
+          // })
+          // .then(() => {
+          //   var promises = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map(x => {
+          //     return instrument.pool.call(x);
+          //   })
+          //   return Promise.all(promises);
+          // })
+          // .then((pools) => {
+          //   swal({
+          //     title: 'Success',
+          //     text: 'Funds have been released!',
+          //     type: 'success',
+          //     confirmButtonText: 'Confirm'
+          //   })
+          //   console.log(pools);
+          // })
         } else {
             swal({
               title: 'Error',
@@ -343,22 +344,22 @@ class Admin extends Component {
   }
 
   handleGetDivClick() {
-    this.props.web3.Instrument.deployed().then(instance => {
-      return instance.collectDividend({from: this.props.web3.Account })
-    })
-    .then((res) => {
-      if(res) {
-        this.setState({
-          adminDividend: 0
-        })
-        swal({
-          title: 'Success',
-          text: 'Collected dividend! Check your metamask wallet!',
-          type: 'success',
-          confirmButtonText: 'Confirm'
-        })
-      }
-    })
+    // this.props.web3.Instrument.deployed().then(instance => {
+    //   return instance.collectDividend({from: this.props.web3.Account })
+    // })
+    // .then((res) => {
+    //   if(res) {
+    //     this.setState({
+    //       adminDividend: 0
+    //     })
+    //     swal({
+    //       title: 'Success',
+    //       text: 'Collected dividend! Check your metamask wallet!',
+    //       type: 'success',
+    //       confirmButtonText: 'Confirm'
+    //     })
+    //   }
+    // })
   }
 
   navBarClick(clicked, name) {

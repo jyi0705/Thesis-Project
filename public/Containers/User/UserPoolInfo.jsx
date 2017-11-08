@@ -28,26 +28,26 @@ class UserPoolInfo extends Component {
   }
 
   verifyButton() {
-    let { web3 } = this.props;
+    // let { web3 } = this.props;
     
     if(!this.props.userPool.isInPool) {
-      web3.Instrument.deployed().then(instance => {
-        return instance.sendTransaction({ from: web3.Account, value: 10 * (Math.pow(10, 18)) })
-      })
-      .then((transObj) => {
-        this.togglePoolInfo()
-        console.log('transaction obj', transObj)
+      // web3.Instrument.deployed().then(instance => {
+      //   return instance.sendTransaction({ from: web3.Account, value: 10 * (Math.pow(10, 18)) })
+      // })
+      // .then((transObj) => {
+      //   this.togglePoolInfo()
+      //   console.log('transaction obj', transObj)
 
-      })
-      .catch(err => {
-        swal({
-          title: 'Error',
-          text: 'Please use metamask to interact with contract!',
-          type: 'error',
-          confirmButtonText: 'Dismiss'
-        })
-        console.log(err);
-      })
+      // })
+      // .catch(err => {
+      //   swal({
+      //     title: 'Error',
+      //     text: 'Please use metamask to interact with contract!',
+      //     type: 'error',
+      //     confirmButtonText: 'Dismiss'
+      //   })
+      //   console.log(err);
+      // })
     }
   }
   

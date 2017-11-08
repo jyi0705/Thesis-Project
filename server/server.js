@@ -1,6 +1,6 @@
 const express = require('express'),
       parser = require('body-parser'),
-      PORT = process.env.PORT || 3004,
+      PORT = process.env.PORT || 3003,
       morgan = require('morgan'),
       mongoose = require('mongoose'),
       userRoutes = require('./userRoutes'),
